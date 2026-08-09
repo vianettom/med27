@@ -51,7 +51,8 @@
   else if (wide.addListener) wide.addListener(onWide);
 
   /* ------------------------------------------------------- Header state --- */
-  // Transparent over the hero, solid navy once past it.
+  // The bar is fixed the whole way down; this only deepens the glass once
+  // there's page content behind it rather than the hero.
   var hero = document.querySelector(".hero");
 
   if (header && hero) {

@@ -128,10 +128,26 @@ artifacts, and it has no mobile board. These were corrected:
 - Agenda, banners, venue and newsletter go from side-by-side to stacked, with full-width CTAs.
 - Footer 4 → 2 → 1 column.
 
-**Prototype behaviour** — no copy added: smooth scrolling to anchors, the header switching from
-transparent to solid navy past the hero, hover/focus states throughout, and the newsletter form
-calling `preventDefault()`. The newsletter field is a real labelled `<input type="email">` rather
-than the Figma's static text.
+**Prototype behaviour** — no copy added: smooth scrolling to anchors, hover/focus states
+throughout, and the newsletter form calling `preventDefault()`. The newsletter field is a real
+labelled `<input type="email">` rather than the Figma's static text.
+
+## Glass
+
+The header and the hero stat block use the iOS material recipe: heavy `backdrop-filter` blur
+plus `saturate(180%)` (the saturation is what keeps the backdrop from going flat and grey), a
+low-alpha fill, a hairline border, and an inset top highlight for the specular edge.
+
+- **The header is `position: fixed` from the first pixel** rather than swapping absolute → fixed
+  past the hero, so it's sticky the whole way down. `.is-stuck` now only deepens the glass once
+  there's page content behind it instead of the hero.
+- **Both blocks have an opaque `@supports not (backdrop-filter)` fallback** — translucent
+  *without* blur is unreadable over photography.
+- **The mobile nav panel gained `max-height` + scroll.** With a permanently fixed header it
+  would otherwise run off the bottom of a short screen with no way to reach the last links.
+- **The stat glass is tinted dark rather than neutral.** A white-weighted fill dropped the coral
+  stat label to 4.30:1 at 390px, under the 4.5 AA floor. Mixing navy into the fill instead of
+  changing the brand coral brings it back to 4.92:1 on mobile and 5.19:1 on desktop.
 
 ## Bloom plates
 
@@ -200,6 +216,11 @@ Driven through headless Chrome over CDP at 320, 375, 390, 430, 540, 640, 768, 90
   decoded, and the actual composited pixel behind each text run sampled. Every run clears WCAG
   AA — tightest is the inactive schedule tab date at 5.98:1 (needs 4.5), then the agenda topic
   number at 6.80:1. Nothing relies on the flat navy still being flat.
+- Text contrast over the glass, sampled the same way. Nav links clear AA over every backdrop the
+  fixed header passes: 16.93:1 on the hero, 9.18:1 on the cyan newsletter, 7.62:1 at its worst
+  over the tinted marquee. Stat text: 13.5:1 figure, 5.19:1 coral label, 15.2:1 note.
+- Header reports `top: 0` at scroll positions 0 / 3000 / 6200, and `.is-stuck` toggles at the
+  hero boundary.
 - Schedule tabs: correct `role`/`aria-selected`/`aria-controls` wiring, exactly one panel
   visible, roving `tabindex`, and arrow-key navigation moving both selection and focus.
 - Degraded paths: with script execution disabled all four days and their labels render and all
