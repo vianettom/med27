@@ -59,7 +59,10 @@
       "Bash(pkill -f 'remote-debugging-port=9222')",
       "Bash(open \"http://localhost:8000/\")",
       "Bash(echo \"=== project .claude/settings.json ===\"; cat /Users/Tom/Documents/GitHub/med27/.claude/settings.json 2>/dev/null || echo \"\\(none\\)\"; echo; echo \"=== user ~/.claude/settings.json ===\"; cat ~/.claude/settings.json 2>/dev/null || echo \"\\(none\\)\"; echo; echo \"=== local overrides ===\"; cat /Users/Tom/Documents/GitHub/med27/.claude/settings.local.json 2>/dev/null || echo \"\\(none\\)\")",
-      "Read(//Users/Tom/.claude/**)"
-    ]
+      "Read(//Users/Tom/.claude/**)",
+      "WebFetch(domain:medicarians.com)",
+      "Bash(curl -s -o /dev/null -w \"server back up: %{http_code}\\\\n\" http://127.0.0.1:8000/)"
+    ],
+    "defaultMode": "auto"
   }
 }

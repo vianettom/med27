@@ -37,6 +37,11 @@
   --pink: #fb98b4;
   --violet: #6b47da;
 
+  /* From the brand guidelines — the two spectrum colours the palette was
+     missing. Used only by the bloom plates below. */
+  --teal: #5ecba1;
+  --magenta: #d949b3;
+
   --ink-muted: #4d5470;
   --ink-faint: #6d7490;
   --line: #e0e3ee;
@@ -137,6 +142,37 @@ button { font: inherit; color: inherit; }
 .section--tint { background: var(--surface); }
 .section--navy { background: var(--navy); color: #fff; }
 
+/* ------------------------------------------------------------ Bloom plates --
+   The brand's "Bloom Plates" device: two or three soft-edged radial colour
+   fields over ink. Their plates are full-bleed artwork, whereas these sit
+   behind body copy, so the blooms are held well back from full strength — see
+   --bloom-strength. The guidelines' rule is "place copy over the calm side",
+   so each section below moves the bloom centres away from its reading column.
+
+   z-index:-1 on the layer plus isolation on the section keeps it behind the
+   content without needing a z-index on every child — same trick as the hero.
+   ---------------------------------------------------------------------------- */
+.section--bloom {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.section--bloom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(46% 60% at var(--bloom-a-at, 78% 12%),
+      var(--bloom-a, var(--blue)) 0%, transparent 62%),
+    radial-gradient(50% 65% at var(--bloom-b-at, 15% 85%),
+      var(--bloom-b, var(--magenta)) 0%, transparent 62%),
+    radial-gradient(40% 55% at var(--bloom-c-at, 60% 60%),
+      var(--bloom-c, var(--teal)) 0%, transparent 65%);
+  opacity: var(--bloom-strength, 0.2);
+  pointer-events: none;
+}
+
 /* -------------------------------------------------------------- Type ----- */
 .eyebrow {
   font-family: var(--font-display);
@@ -186,6 +222,9 @@ button { font: inherit; color: inherit; }
 .h3-lg--navy { color: var(--navy); }
 
 .section-head { max-width: 588px; }
+/* For headings the 588px cap breaks onto a third line. 720px is the narrowest
+   width that fits "There Is More to Medicarians Than Medicare." in two. */
+.section-head--wide { max-width: 720px; }
 .section-head--center {
   margin-inline: auto;
   text-align: center;
@@ -366,7 +405,7 @@ button { font: inherit; color: inherit; }
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: rgba(5, 17, 53, 0.6);
+  background: rgba(5, 17, 53, 0.8);
 }
 
 .hero__inner {
@@ -470,32 +509,71 @@ button { font: inherit; color: inherit; }
    588px-capped headers elsewhere. */
 .logo-wall .section-head { max-width: none; }
 
-/* The 1px gap over a --line background is what draws the hairlines, so the
-   column count must divide the 14 cells exactly — otherwise the unfilled part
-   of the last row shows up as a solid grey block. Only 7 and 2 qualify. */
-.logo-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
+/* --- Marquee ------------------------------------------------------------
+   Three full-bleed rows, the middle one running the other way. Each track
+   holds the row's names twice and slides exactly one copy width, so the loop
+   is seamless with no JS.
+   ------------------------------------------------------------------------ */
+.logo-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 48px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  overflow: hidden;
 }
-.logo-grid__cell {
+
+.logo-track-wrap {
+  overflow: hidden;
+  /* Fade both ends into the section tint so rows don't hard-cut at the edge. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: logo-marquee var(--speed, 60s) linear infinite;
+}
+.logo-track--reverse { animation-direction: reverse; }
+
+/* Let people stop it to actually read a name. */
+.logo-track-wrap:hover .logo-track,
+.logo-track-wrap:focus-within .logo-track { animation-play-state: paused; }
+
+/* The gap lives on the item rather than the track: with `gap`, two copies plus
+   the seam between them don't total exactly twice one copy, so translateX(-50%)
+   slips by half a gap every lap. Folding the gap into the item makes the halves
+   exact. */
+.logo-track__item {
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 96px;
+  min-width: 200px;
+  height: 84px;
+  margin-right: 16px;
+  padding: 0 24px;
   background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--ink-muted);
 }
-.logo-grid__chip {
-  width: 78px;
-  max-width: 60%;
-  height: 20px;
-  background: var(--line);
-  border-radius: 3px;
+
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.logo-wall__cta {
+  display: flex;
+  width: fit-content;
+  margin: 40px auto 0;
 }
 
 /* ========================================================== Audience ====== */
@@ -517,11 +595,108 @@ button { font: inherit; color: inherit; }
   background: #fff;
 }
 .audience-card .h3 { margin-top: 24px; }
-.audience-card__body {
-  margin-top: 10px;
+.audience-card__points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+.audience-card__points li {
+  position: relative;
+  padding-left: 18px;
   font-size: 14px;
   line-height: 22.4px;
   color: var(--ink-muted);
+}
+.audience-card__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+/* ========================================================== Programs ====== */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.program-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+/* The logos are wordmarks carrying the programme name, so they stand in for the
+   card heading — the h3 keeps its accessible name from the img alt.
+   Normalised on WIDTH, not height: two of the three are Medicarians lockups
+   sharing one wordmark, and matching heights across their different aspect
+   ratios rendered that shared wordmark at two different sizes. The height cap
+   is only a backstop, and the fixed row keeps the copy below aligned. */
+.program-card__logo {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  margin-top: 20px;
+}
+.program-card__logo img {
+  width: auto;
+  height: auto;
+  max-width: min(210px, 100%);
+  max-height: 64px;
+}
+
+.program-card__body {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 22.4px;
+  color: var(--ink-muted);
+}
+/* margin-top:auto pins the date to the bottom so the three cards agree even
+   though their copy runs to different lengths. */
+.program-card__meta {
+  margin-top: auto;
+  padding-top: 24px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--blue-deep);
+}
+
+/* Copy runs top-left in both navy sections, so the bloom centres are pushed
+   right and low to keep the reading column calm. The two use different spectrum
+   pairs so they don't read as the same plate twice. */
+.agenda {
+  --bloom-a-at: 88% 8%;
+  --bloom-b-at: 4% 96%;
+  --bloom-c-at: 66% 58%;
+  --bloom-strength: 0.2;
+}
+.schedule {
+  --bloom-a: var(--cyan);
+  --bloom-b: var(--violet);
+  --bloom-c: var(--blue);
+  --bloom-a-at: 92% 22%;
+  --bloom-b-at: 8% 86%;
+  --bloom-c-at: 50% 50%;
+  --bloom-strength: 0.15;
+}
+/* Lowest of the three — the footer is nearly all 13–14px link text. */
+.site-footer {
+  --bloom-a-at: 84% 6%;
+  --bloom-b-at: 8% 92%;
+  --bloom-c-at: 45% 55%;
+  --bloom-strength: 0.13;
 }
 
 /* ============================================================ Agenda ====== */
@@ -580,13 +755,20 @@ button { font: inherit; color: inherit; }
 .banner__body--sm { font-size: 14px; max-width: 534px; }
 
 /* ========================================================== Speakers ====== */
+/* Flex rather than grid: 26 speakers don't divide evenly by any sensible column
+   count, and this centres the short final row instead of leaving it orphaned
+   hard-left. --cols is the only thing the breakpoints need to change. */
 .speaker-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 30px 24px;
+  --cols: 5;
+  --col-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px var(--col-gap);
   margin-top: 30px;
 }
 .speaker-card {
+  flex: 0 1 calc((100% - var(--col-gap) * (var(--cols) - 1)) / var(--cols));
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -605,6 +787,21 @@ button { font: inherit; color: inherit; }
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+/* Only one real headshot has been sourced. The rest get a monogram rather than
+   that person's face repeated under 25 other people's names. */
+.speaker-card__photo--ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, rgba(2, 129, 251, 0.16), rgba(4, 60, 167, 0.08));
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(26px, 3.2vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--blue-deep);
 }
 .speaker-card__body {
   display: flex;
@@ -638,6 +835,216 @@ button { font: inherit; color: inherit; }
   display: flex;
   width: fit-content;
   margin: 30px auto 0;
+}
+
+/* ========================================================== Schedule ====== */
+.schedule__days { margin-top: 40px; }
+
+/* --- Day tabs -----------------------------------------------------------
+   Built by script.js. Without it every day stays stacked and visible, so
+   everything below is scoped to .is-tabbed. The cyan underline is the same
+   device the header nav uses.
+   ------------------------------------------------------------------------ */
+.sched-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 40px;
+  margin-top: 40px;
+  border-bottom: 1px solid rgba(224, 227, 238, 0.22);
+}
+
+.sched-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 0 16px;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+.sched-tab:hover { color: rgba(255, 255, 255, 0.88); }
+.sched-tab.is-on { color: #fff; }
+
+.sched-tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s ease;
+}
+.sched-tab.is-on::after { transform: scaleX(1); }
+
+.sched-tab__dow {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.sched-tab__date {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: inherit;
+  transition: color 0.18s ease;
+}
+.sched-tab.is-on .sched-tab__date { color: var(--pink); }
+
+/* In tabbed mode the tab carries the day label, so the in-panel one goes. */
+.schedule.is-tabbed .schedule__days { margin-top: 0; }
+.schedule.is-tabbed .day__label { display: none; }
+.schedule.is-tabbed .day {
+  display: none;
+  padding-block: 12px 0;
+  border: 0;
+}
+.schedule.is-tabbed .day.is-on { display: block; }
+
+.schedule.is-tabbed .day.is-on .day__row {
+  animation: sched-row-in 0.42s ease both;
+  animation-delay: var(--d, 0s);
+}
+@keyframes sched-row-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  padding-block: 32px;
+  border-top: 1px solid rgba(224, 227, 238, 0.22);
+}
+.day:last-child { border-bottom: 1px solid rgba(224, 227, 238, 0.22); }
+
+.day__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.day__dow {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.day__date {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+.day__rows {
+  display: flex;
+  flex-direction: column;
+}
+.day__row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 11px;
+  border-bottom: 1px solid rgba(224, 227, 238, 0.14);
+}
+.day__row:last-child { border-bottom: 0; }
+.day__time {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 20.8px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.day__event {
+  font-size: 14px;
+  line-height: 20.8px;
+  letter-spacing: -0.24px;
+  color: #fff;
+}
+
+/* ========================================================== Sponsors ====== */
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 48px;
+}
+.tier__label {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.tier__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.tier__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 14px 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+/* Placeholder until real sponsor logos are sourced — same treatment as the
+   logo wall's chips. */
+.tier__chip {
+  display: block;
+  width: 112px;
+  height: 22px;
+  background: var(--line);
+  border-radius: 3px;
+}
+
+/* Tier rank is carried by scale rather than colour, so the wall still reads as
+   one grid. */
+.tier--title .tier__item {
+  padding: 22px 32px;
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-card);
+}
+.tier--title .tier__chip { width: 176px; height: 30px; }
+
+.tier--platinum .tier__item { padding: 18px 24px; }
+.tier--platinum .tier__chip { width: 132px; height: 24px; }
+
+.tier--silver .tier__item { padding: 12px 18px; }
+.tier--silver .tier__chip { width: 96px; height: 20px; }
+
+.sponsors__cta {
+  display: flex;
+  width: fit-content;
+  margin: 48px auto 0;
 }
 
 /* ============================================================= Venue ====== */
@@ -771,6 +1178,16 @@ button { font: inherit; color: inherit; }
 }
 .site-footer__list a:hover { color: var(--cyan); }
 
+.site-footer__list--mail {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.site-footer__list--mail a {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
 .site-footer__bottom {
   display: flex;
   align-items: center;
@@ -830,8 +1247,11 @@ button { font: inherit; color: inherit; }
     padding: 14px 26px;
   }
 
-  .speaker-grid { grid-template-columns: repeat(4, 1fr); }
+  .speaker-grid { --cols: 4; }
   .venue__photo { flex-basis: 45%; width: 45%; height: 360px; }
+
+  .day { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; }
+  .day__row { grid-template-columns: 165px minmax(0, 1fr); gap: 16px; }
 }
 
 /* --- 900px: two-up everywhere, banners stack ----------------------------- */
@@ -848,7 +1268,16 @@ button { font: inherit; color: inherit; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
-  .speaker-grid { grid-template-columns: repeat(3, 1fr); }
+  .speaker-grid { --cols: 3; }
+
+  .program-grid { grid-template-columns: 1fr; gap: 16px; }
+  .program-card__meta { margin-top: 20px; padding-top: 0; }
+
+  .day {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 28px;
+  }
 
   .topics {
     grid-template-columns: minmax(0, 1fr);
@@ -889,18 +1318,73 @@ button { font: inherit; color: inherit; }
 
   .hero { padding-block: calc(var(--header-h) + 56px) 48px; }
   .hero__copy .btn,
-  .speakers__cta { width: 100%; }
+  .speakers__cta,
+  .logo-wall__cta,
+  .sponsors__cta { width: 100%; }
 
-  .stats { grid-template-columns: 1fr; gap: 22px; padding: 24px; }
+  /* 2×2 rather than a single column — four stacked stats pushed the hero CTA
+     well below the fold. */
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+    padding: 20px;
+  }
+  .stat { padding-left: 10px; }
+  .stat__value { font-size: clamp(22px, 6vw, 30px); }
+  .stat__label { margin-top: 8px; }
 
-  .logo-grid { grid-template-columns: repeat(2, 1fr); margin-top: 32px; }
-  .logo-grid__cell { min-height: 84px; }
+  /* The notes ran to three lines each in a half-width column. Hidden visually
+     rather than removed, so the figures still read the same to a screen
+     reader as they do on desktop. */
+  .stat__note {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .logo-marquee { gap: 12px; margin-top: 32px; }
+  .logo-track__item {
+    min-width: 150px;
+    height: 68px;
+    margin-right: 12px;
+    padding: 0 18px;
+    font-size: 13px;
+  }
 
   .audience-grid { grid-template-columns: 1fr; }
   .audience-card { min-height: 0; padding: 24px; }
 
-  .speaker-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+  .speaker-grid { --cols: 2; --col-gap: 16px; gap: 20px var(--col-gap); }
   .speaker-card__name { font-size: 16px; }
+
+  .program-card { padding: 24px; }
+
+  .day__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    padding-block: 12px;
+  }
+
+  .sched-tabs { gap: 4px 24px; }
+  .sched-tab { padding-bottom: 12px; }
+  .sched-tab__dow { font-size: 17px; }
+  .sched-tab__date { font-size: 11px; }
+
+  .tiers { gap: 32px; }
+  .tier__list { gap: 10px; }
+  .tier__item { padding: 12px 16px; }
+  .tier__chip { width: 88px; height: 20px; }
+  .tier--title .tier__item { padding: 18px 22px; }
+  .tier--title .tier__chip { width: 132px; height: 26px; }
+  .tier--platinum .tier__item { padding: 14px 18px; }
+  .tier--platinum .tier__chip { width: 100px; height: 22px; }
+  .tier--silver .tier__chip { width: 78px; height: 18px; }
 
   .banner { padding: 32px 24px; }
 
@@ -923,5 +1407,18 @@ button { font: inherit; color: inherit; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+
+  /* Zeroing the duration would leave the marquee parked at its end state,
+     mid-loop. Stop it outright and hand the row over to the user to scroll,
+     with the edge fade removed so nothing looks clipped. */
+  .logo-track {
+    animation: none !important;
+    transform: none !important;
+  }
+  .logo-track-wrap {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }

@@ -28,12 +28,12 @@
     <nav class="site-nav" id="primary-nav" aria-label="Primary">
       <ul class="site-nav__list">
         <li><a href="#who-attends">Who Attends</a></li>
-        <li><a href="#tracks">Tracks</a></li>
         <li><a href="#speakers">Speakers</a></li>
         <li><a href="#agenda">Agenda</a></li>
-        <li><a href="#pass">Pass</a></li>
-        <li><a href="#sponsor">Sponsor</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#venue">Venue</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <a class="btn btn--primary btn--sm site-nav__cta" href="#register">Register &rarr;</a>
     </nav>
@@ -52,7 +52,7 @@
     <div class="hero__inner">
       <div class="hero__copy">
         <img class="hero__lockup" src="assets/img/logo-lockup.svg" alt="Medicarians Vegas 2027" width="372" height="39">
-        <h1 class="hero__title">The Home of Senior Health &amp; Wealth Distribution.</h1>
+        <h1 class="hero__title">The Home of Senior Health &amp; Wealth Distribution</h1>
         <p class="hero__date">April 12–14, 2027 · Caesars Forum · Las Vegas</p>
         <p class="hero__lede">Medicarians is the single largest gathering of senior health and wealth distribution professionals, bringing together the entire value chain, including agents and agency owners, product creators, care providers and plans, investors, and innovators—all under one roof.</p>
         <a class="btn btn--primary" href="#register" id="register">Register Now &rarr;</a>
@@ -60,22 +60,22 @@
 
       <dl class="stats">
         <div class="stat">
-          <dt class="stat__value">6,000+</dt>
+          <dt class="stat__value" data-counter="6000" data-counter-suffix="+" data-counter-duration="1600">6,000+</dt>
           <dd class="stat__label">Attendees</dd>
           <dd class="stat__note">From every corner of the ecosystem</dd>
         </div>
         <div class="stat">
-          <dt class="stat__value">3,000+</dt>
+          <dt class="stat__value" data-counter="3000" data-counter-suffix="+" data-counter-duration="1600">3,000+</dt>
           <dd class="stat__label">Agents</dd>
           <dd class="stat__note">Independent agents and licensed advisors</dd>
         </div>
         <div class="stat">
-          <dt class="stat__value">325+</dt>
+          <dt class="stat__value" data-counter="325" data-counter-suffix="+" data-counter-duration="1600">325+</dt>
           <dd class="stat__label">Speakers</dd>
           <dd class="stat__note">Thought leaders, pioneers and policymakers</dd>
         </div>
         <div class="stat">
-          <dt class="stat__value">100+</dt>
+          <dt class="stat__value" data-counter="100" data-counter-suffix="+" data-counter-duration="1600">100+</dt>
           <dd class="stat__label">Sessions</dd>
           <dd class="stat__note">Keynotes, panels, workshops, fireside chats</dd>
         </div>
@@ -89,24 +89,90 @@
       <div class="section-head section-head--center">
         <p class="eyebrow eyebrow--blue">Who Attends</p>
         <h2 class="h2">Where the Senior Health &amp; Wealth Distribution Ecosystem Connects and Grows.</h2>
+        <p class="section-head__lede">Just a few companies who attended Medicarians Vegas 2026.</p>
       </div>
+    </div>
 
-      <ul class="logo-grid" aria-label="Attending organizations">
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-        <li class="logo-grid__cell"><span class="logo-grid__chip"></span></li>
-      </ul>
+    <div class="logo-marquee" role="group" aria-label="Companies who attended Medicarians Vegas 2026">
+      <div class="logo-track-wrap">
+        <ul class="logo-track" style="--speed: 58s">
+          <li class="logo-track__item">Aetna</li>
+          <li class="logo-track__item">AGA</li>
+          <li class="logo-track__item">Agent Boost Marketing</li>
+          <li class="logo-track__item">AmeriLife</li>
+          <li class="logo-track__item">Ascend Broker</li>
+          <li class="logo-track__item">BBY</li>
+          <li class="logo-track__item">Blue Cross</li>
+          <li class="logo-track__item">B-Well</li>
+          <li class="logo-track__item">Cigna</li>
+          <li class="logo-track__item">CIA</li>
+          <!-- Second copy: what makes translateX(-50%) loop seamlessly. -->
+          <li class="logo-track__item" aria-hidden="true">Aetna</li>
+          <li class="logo-track__item" aria-hidden="true">AGA</li>
+          <li class="logo-track__item" aria-hidden="true">Agent Boost Marketing</li>
+          <li class="logo-track__item" aria-hidden="true">AmeriLife</li>
+          <li class="logo-track__item" aria-hidden="true">Ascend Broker</li>
+          <li class="logo-track__item" aria-hidden="true">BBY</li>
+          <li class="logo-track__item" aria-hidden="true">Blue Cross</li>
+          <li class="logo-track__item" aria-hidden="true">B-Well</li>
+          <li class="logo-track__item" aria-hidden="true">Cigna</li>
+          <li class="logo-track__item" aria-hidden="true">CIA</li>
+        </ul>
+      </div>
+      <div class="logo-track-wrap">
+        <ul class="logo-track logo-track--reverse" style="--speed: 66s">
+          <li class="logo-track__item">CSG</li>
+          <li class="logo-track__item">E123</li>
+          <li class="logo-track__item">HPO</li>
+          <li class="logo-track__item">HealthSherpa</li>
+          <li class="logo-track__item">Humana</li>
+          <li class="logo-track__item">Integrity</li>
+          <li class="logo-track__item">MAN</li>
+          <li class="logo-track__item">Milliman</li>
+          <li class="logo-track__item">Mutual of Omaha</li>
+          <li class="logo-track__item">NCD</li>
+          <!-- Second copy: what makes translateX(-50%) loop seamlessly. -->
+          <li class="logo-track__item" aria-hidden="true">CSG</li>
+          <li class="logo-track__item" aria-hidden="true">E123</li>
+          <li class="logo-track__item" aria-hidden="true">HPO</li>
+          <li class="logo-track__item" aria-hidden="true">HealthSherpa</li>
+          <li class="logo-track__item" aria-hidden="true">Humana</li>
+          <li class="logo-track__item" aria-hidden="true">Integrity</li>
+          <li class="logo-track__item" aria-hidden="true">MAN</li>
+          <li class="logo-track__item" aria-hidden="true">Milliman</li>
+          <li class="logo-track__item" aria-hidden="true">Mutual of Omaha</li>
+          <li class="logo-track__item" aria-hidden="true">NCD</li>
+        </ul>
+      </div>
+      <div class="logo-track-wrap">
+        <ul class="logo-track" style="--speed: 52s">
+          <li class="logo-track__item">Oscar Insurance</li>
+          <li class="logo-track__item">Pinnacle</li>
+          <li class="logo-track__item">SCAN</li>
+          <li class="logo-track__item">Senior Market Sales</li>
+          <li class="logo-track__item">Spark</li>
+          <li class="logo-track__item">SVG</li>
+          <li class="logo-track__item">SunFire</li>
+          <li class="logo-track__item">Swiss Re</li>
+          <li class="logo-track__item">TLC</li>
+          <li class="logo-track__item">VSP</li>
+          <!-- Second copy: what makes translateX(-50%) loop seamlessly. -->
+          <li class="logo-track__item" aria-hidden="true">Oscar Insurance</li>
+          <li class="logo-track__item" aria-hidden="true">Pinnacle</li>
+          <li class="logo-track__item" aria-hidden="true">SCAN</li>
+          <li class="logo-track__item" aria-hidden="true">Senior Market Sales</li>
+          <li class="logo-track__item" aria-hidden="true">Spark</li>
+          <li class="logo-track__item" aria-hidden="true">SVG</li>
+          <li class="logo-track__item" aria-hidden="true">SunFire</li>
+          <li class="logo-track__item" aria-hidden="true">Swiss Re</li>
+          <li class="logo-track__item" aria-hidden="true">TLC</li>
+          <li class="logo-track__item" aria-hidden="true">VSP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container">
+      <a class="btn btn--outline-dark logo-wall__cta" href="#who-attends">See All Who Attended &rarr;</a>
     </div>
   </section>
 
@@ -123,39 +189,62 @@
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Producers</p>
           <h3 class="h3">Agents &amp; Brokers</h3>
-          <p class="audience-card__body">Learn directly from major carriers, health plans, and regulators about the forces shaping our industry.</p>
+          <ul class="audience-card__points">
+            <li>Learn directly from major carriers, health plans, and regulators about the forces shaping our industry.</li>
+            <li>Get expert guidance from the most successful and forward-thinking producers and agency owners in the country.</li>
+            <li>Network with 4,000+ like-minded players in the Medicare, ACA, and senior wealth distribution landscape.</li>
+          </ul>
         </li>
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Distribution</p>
           <h3 class="h3">Agency Owners &amp; Principals</h3>
-          <p class="audience-card__body">Discover how fellow agency owners are navigating a complex and competitive market and staying efficient and nimble with new technology.</p>
+          <ul class="audience-card__points">
+            <li>Discover how fellow agency owners are navigating a complex and competitive market and staying efficient and nimble with new technology.</li>
+            <li>Learn how to scale your agency without compromising service to clients.</li>
+            <li>Accelerate your growth by developing new relationships with FMOs, IMOs, carriers, health plans, and agents.</li>
+          </ul>
         </li>
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Plans</p>
           <h3 class="h3">IMOs &amp; FMOs</h3>
-          <p class="audience-card__body">Learn how to optimize your business at scale, working with thousands of independent agents and agencies.</p>
+          <ul class="audience-card__points">
+            <li>Learn how to optimize your business at scale, working with thousands of independent agents and agencies.</li>
+            <li>See how successful FMOs and IMOs holistically comply with regulations and stay ahead of emerging trends.</li>
+            <li>Solidify new partnerships with carriers and health plans as a competitive advantage.</li>
+          </ul>
         </li>
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Plans</p>
           <h3 class="h3">Carriers &amp; Health Plans</h3>
-          <p class="audience-card__body">Hear the latest product design trends across the entire distribution ecosystem– from senior health to wealth offerings.</p>
+          <ul class="audience-card__points">
+            <li>Hear the latest product design trends across the entire distribution ecosystem– from senior health to wealth offerings.</li>
+            <li>Learn directly from agents &amp; brokers about what seniors want and how to differentiate your products.</li>
+            <li>Meet new distributors and strengthen your relationship with current ones.</li>
+          </ul>
         </li>
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Capital</p>
           <h3 class="h3">Investors &amp; Startups</h3>
-          <p class="audience-card__body">Connect with startup leaders and discover emerging companies that are disrupting the marketplace.</p>
+          <ul class="audience-card__points">
+            <li>Connect with startup leaders and discover emerging companies that are disrupting the marketplace.</li>
+            <li>Decipher how regulatory changes are guiding investment decisions.</li>
+            <li>Meet other investors, venture capital, and private equity teams who are accelerating innovation in our industry.</li>
+          </ul>
         </li>
         <li class="audience-card">
           <p class="eyebrow eyebrow--blue eyebrow--sm">Compliance</p>
-          <h3 class="h3">Regulators &amp; Compliance</h3>
-          <p class="audience-card__body">Understand the current market challenges and opportunities that leaders are facing.</p>
+          <h3 class="h3">Regulators &amp; Compliance Executives</h3>
+          <ul class="audience-card__points">
+            <li>Understand the current market challenges and opportunities that leaders are facing.</li>
+            <li>Convey evolving regulatory frameworks, and communicate compliance requirements for an efficient marketplace.</li>
+          </ul>
         </li>
       </ul>
     </div>
   </section>
 
   <!-- ============================ Agenda ============================ -->
-  <section class="section section--navy agenda" id="agenda">
+  <section class="section section--navy section--bloom agenda" id="agenda">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow eyebrow--pink">On Stage</p>
@@ -176,7 +265,7 @@
         <li class="topic"><span class="topic__num">10</span><span class="topic__title">Agency Owners: Preparing for Your Next Level of Growth</span></li>
       </ol>
 
-      <div class="banner banner--speak">
+      <div class="banner banner--speak" id="speak">
         <div class="banner__copy">
           <p class="eyebrow eyebrow--light">Shape the Program</p>
           <h2 class="h3-lg">Apply to Speak.</h2>
@@ -184,6 +273,44 @@
         </div>
         <a class="btn btn--pink" href="#speak">Apply to Speak &rarr;</a>
       </div>
+    </div>
+  </section>
+
+  <!-- =========================== Programs =========================== -->
+  <section class="section section--tint programs" id="programs">
+    <div class="container">
+      <div class="section-head section-head--center section-head--wide">
+        <p class="eyebrow eyebrow--blue">Included With Your Pass</p>
+        <h2 class="h2">There Is More to Medicarians Than Medicare.</h2>
+        <p class="section-head__lede">Three focused programs run alongside the main conference on Monday, April 12 — all included with a Medicarians pass.</p>
+      </div>
+
+      <ul class="program-grid">
+        <li class="program-card">
+          <p class="eyebrow eyebrow--blue eyebrow--sm">In Partnership With Medicare Answers Now</p>
+          <h3 class="program-card__logo">
+            <img src="assets/img/M_Agent_Symposium-Logo.png" alt="Medicarians Agent Symposium" width="417" height="98" loading="lazy">
+          </h3>
+          <p class="program-card__body">In Partnership with Medicare Answers Now, the Agent Symposium is a Kick-Off intensive for agents by agents. It is the perfect way for agents to learn and network and a great beginning to one's Medicarians' experience.</p>
+          <p class="program-card__meta">Mon, Apr 12 · 12:00–5:00 PM</p>
+        </li>
+        <li class="program-card">
+          <p class="eyebrow eyebrow--blue eyebrow--sm">In Partnership With Compass &amp; HealthSherpa</p>
+          <h3 class="program-card__logo">
+            <img src="assets/img/ACA-Logo.png" alt="ACA Health Summit" width="417" height="75" loading="lazy">
+          </h3>
+          <p class="program-card__body">Also included with a Medicarians pass is the ACA Health Summit. In partnership with Compass Insurance Advisors and HealthSherpa, the ACA Health Summit is a unique individual markets focused program.</p>
+          <p class="program-card__meta">Mon, Apr 12 · 12:00–5:00 PM</p>
+        </li>
+        <li class="program-card">
+          <p class="eyebrow eyebrow--blue eyebrow--sm">Senior Wealth</p>
+          <h3 class="program-card__logo">
+            <img src="assets/img/life-and-annuities-logo.png" alt="Medicarians Life &amp; Annuities Forum" width="556" height="173" loading="lazy">
+          </h3>
+          <p class="program-card__body">The Life &amp; Annuities Forum at Medicarians Vegas features educational conversations on senior related financial offerings, such as life insurance and annuities, to reverse mortgages, final expense, life settlement, and more.</p>
+          <p class="program-card__meta">Mon, Apr 12 · 12:00–5:00 PM</p>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -198,88 +325,349 @@
 
       <ul class="speaker-grid">
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">JB</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">John Brooks</p>
+            <p class="speaker-card__role">Deputy Administrator &amp; Chief Policy and Regulatory Officer</p>
+            <p class="speaker-card__org">Centers for Medicare &amp; Medicaid Services</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">MB</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Mark Bertolini</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">Oscar Health</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">SJ</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Sachin Jain, MD</p>
+            <p class="speaker-card__role">President &amp; Chief Executive Officer</p>
+            <p class="speaker-card__org">SCAN Group &amp; SCAN Health Plan</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">CC</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Cynthia Cox</p>
+            <p class="speaker-card__role">Vice President</p>
+            <p class="speaker-card__org">Kaiser Family Foundation</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">DM</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Dawn Maroney</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">Alignment Health Plan</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">GK</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">George Kalogeropoulos</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">HealthSherpa</p>
           </div>
         </li>
         <li class="speaker-card">
           <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
           <div class="speaker-card__body">
             <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__role">Director of Strategic Projects &amp; Initiatives</p>
+            <p class="speaker-card__org">U.S. Department of Health and Human Services</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">PN</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Peter Nelson</p>
+            <p class="speaker-card__role">Deputy Administrator &amp; Director of CCIIO</p>
+            <p class="speaker-card__org">Centers for Medicare &amp; Medicaid Services</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">RM</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Rogelyn D. McLean</p>
+            <p class="speaker-card__role">Senior Advisor, Center for Consumer Information &amp; Insurance Oversight</p>
+            <p class="speaker-card__org">Centers for Medicare &amp; Medicaid Services</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">DM</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Dean Mohs</p>
+            <p class="speaker-card__role">Division Director, Strategic Stakeholder Engagement &amp; Operations</p>
+            <p class="speaker-card__org">Centers for Medicare &amp; Medicaid Services</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">GL</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Greg LaManna</p>
+            <p class="speaker-card__role">Chief Duals Integration Officer</p>
+            <p class="speaker-card__org">Wellcare</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">AB</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Amanda Brewton</p>
+            <p class="speaker-card__role">Owner</p>
+            <p class="speaker-card__org">Medicare Answers Now</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">GD</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">George Dippel</p>
+            <p class="speaker-card__role">President</p>
+            <p class="speaker-card__org">Deft Research</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">NG</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Ned Gaines</p>
+            <p class="speaker-card__role">Insurance Commissioner</p>
+            <p class="speaker-card__org">State of Nevada</p>
           </div>
         </li>
         <li class="speaker-card">
-          <img class="speaker-card__photo" src="assets/img/speaker.png" alt="Isaac Bledsoe" width="300" height="300" loading="lazy">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">GM</span>
           <div class="speaker-card__body">
-            <p class="speaker-card__name">Isaac Bledsoe</p>
-            <p class="speaker-card__role">Director Of Strategic Projects &amp; Initiatives</p>
-            <p class="speaker-card__org">U.S. Department Of Health And Human Services</p>
+            <p class="speaker-card__name">Glen Mulready</p>
+            <p class="speaker-card__role">Commissioner</p>
+            <p class="speaker-card__org">Oklahoma Department of Insurance</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">MH</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Michael Hilf</p>
+            <p class="speaker-card__role">Chief Executive Officer &amp; Co-Founder</p>
+            <p class="speaker-card__org">Healthcare Funding Partners</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">LJ</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Lauren Jenkins</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">Native Oklahoma Insurance</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">SM</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Sam Melamed</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">NCD</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">PN</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Patrick Neubert</p>
+            <p class="speaker-card__role">Commander</p>
+            <p class="speaker-card__org">U.S. Public Health Service</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">AN</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Alexandra Nguyen</p>
+            <p class="speaker-card__role">Senior Leader of FMO Distribution</p>
+            <p class="speaker-card__org">Florida Blue</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">VN</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Vipan Nikore, MD</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">Homecare Hub</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">BN</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">B. Ronnell Nolan, HIA</p>
+            <p class="speaker-card__role">Chief Executive Officer</p>
+            <p class="speaker-card__org">Health Agents for America</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">RN</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Rohit Nuwal</p>
+            <p class="speaker-card__role">Partner</p>
+            <p class="speaker-card__org">TELUS Global Ventures</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">DO</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Duncan Orrell-Jones</p>
+            <p class="speaker-card__role">Chief Executive Officer &amp; Co-Founder</p>
+            <p class="speaker-card__org">Camino Mobility</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">AP</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Arundhati Parmar</p>
+            <p class="speaker-card__role">Vice President &amp; Editor-in-Chief</p>
+            <p class="speaker-card__org">MedCity News</p>
+          </div>
+        </li>
+        <li class="speaker-card">
+          <span class="speaker-card__photo speaker-card__photo--ph" aria-hidden="true">JS</span>
+          <div class="speaker-card__body">
+            <p class="speaker-card__name">Jared Strock</p>
+            <p class="speaker-card__role">Principal &amp; Consulting Actuary</p>
+            <p class="speaker-card__org">Telos Actuarial</p>
           </div>
         </li>
       </ul>
 
       <a class="btn btn--outline-dark speakers__cta" href="#speakers">View All Speakers &rarr;</a>
+    </div>
+  </section>
+
+  <!-- =========================== Schedule =========================== -->
+  <section class="section section--navy section--bloom schedule" id="schedule">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--pink">Plan Your Days</p>
+        <h2 class="h2 h2--light">2027 Schedule of Events.</h2>
+        <p class="section-head__lede section-head__lede--light">Four days at Caesars Forum, from Sunday registration through the official after party. Times are subject to change.</p>
+      </div>
+
+      <div class="schedule__days">
+        <section class="day">
+          <h3 class="day__label"><span class="day__dow">Sunday</span><span class="day__date">April 11</span></h3>
+          <ol class="day__rows">
+            <li class="day__row"><span class="day__time">5:00 – 7:00 PM</span><span class="day__event">Registration Open</span></li>
+          </ol>
+        </section>
+        <section class="day">
+          <h3 class="day__label"><span class="day__dow">Monday</span><span class="day__date">April 12</span></h3>
+          <ol class="day__rows">
+            <li class="day__row"><span class="day__time">8:00 AM – 6:30 PM</span><span class="day__event">Registration Open</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 5:00 PM</span><span class="day__event">Agent Symposium</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 5:00 PM</span><span class="day__event">Life &amp; Annuities Forum</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 5:00 PM</span><span class="day__event">ACA Health Summit</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 5:00 PM</span><span class="day__event">Tabletop Exhibits</span></li>
+            <li class="day__row"><span class="day__time">5:00 – 7:00 PM</span><span class="day__event">Kick-Off Party</span></li>
+          </ol>
+        </section>
+        <section class="day">
+          <h3 class="day__label"><span class="day__dow">Tuesday</span><span class="day__date">April 13</span></h3>
+          <ol class="day__rows">
+            <li class="day__row"><span class="day__time">7:00 AM – 5:00 PM</span><span class="day__event">Registration Open</span></li>
+            <li class="day__row"><span class="day__time">8:00 – 9:30 AM</span><span class="day__event">Breakfast</span></li>
+            <li class="day__row"><span class="day__time">8:30 – 10:35 AM</span><span class="day__event">Plenary Sessions</span></li>
+            <li class="day__row"><span class="day__time">10:30 AM – 5:00 PM</span><span class="day__event">Expo Hall Open</span></li>
+            <li class="day__row"><span class="day__time">10:35 – 10:45 AM</span><span class="day__event">Transitions to Tracks</span></li>
+            <li class="day__row"><span class="day__time">10:45 AM – 12:00 PM</span><span class="day__event">Morning Tracks</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 2:00 PM</span><span class="day__event">Lunch</span></li>
+            <li class="day__row"><span class="day__time">2:00 – 4:15 PM</span><span class="day__event">Afternoon Tracks</span></li>
+            <li class="day__row"><span class="day__time">4:00 – 5:00 PM</span><span class="day__event">Official Reception</span></li>
+          </ol>
+        </section>
+        <section class="day">
+          <h3 class="day__label"><span class="day__dow">Wednesday</span><span class="day__date">April 14</span></h3>
+          <ol class="day__rows">
+            <li class="day__row"><span class="day__time">7:00 AM – 3:00 PM</span><span class="day__event">Registration Open</span></li>
+            <li class="day__row"><span class="day__time">8:00 – 9:30 AM</span><span class="day__event">Breakfast</span></li>
+            <li class="day__row"><span class="day__time">8:30 – 10:35 AM</span><span class="day__event">Plenary Sessions</span></li>
+            <li class="day__row"><span class="day__time">10:30 AM – 5:00 PM</span><span class="day__event">Expo Hall Open</span></li>
+            <li class="day__row"><span class="day__time">10:35 – 10:45 AM</span><span class="day__event">Transition to Tracks</span></li>
+            <li class="day__row"><span class="day__time">10:45 AM – 12:00 PM</span><span class="day__event">Morning Tracks</span></li>
+            <li class="day__row"><span class="day__time">12:00 – 2:00 PM</span><span class="day__event">Lunch</span></li>
+            <li class="day__row"><span class="day__time">2:00 – 4:15 PM</span><span class="day__event">Afternoon Tracks</span></li>
+            <li class="day__row"><span class="day__time">4:00 – 5:00 PM</span><span class="day__event">Closing Reception</span></li>
+            <li class="day__row"><span class="day__time">9:00 – 11:00 PM</span><span class="day__event">Official After Party</span></li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== Sponsors =========================== -->
+  <section class="section sponsors" id="sponsors">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <p class="eyebrow eyebrow--blue">Thank You</p>
+        <h2 class="h2">Medicarians 2027 Sponsors.</h2>
+        <p class="section-head__lede">Medicarians 2027 would not be possible without the generous support of our sponsoring companies.</p>
+      </div>
+
+      <div class="tiers">
+        <section class="tier tier--title">
+          <h3 class="tier__label">Title</h3>
+          <ul class="tier__list" aria-label="1 title sponsor — logos to come">
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+          </ul>
+        </section>
+        <section class="tier tier--platinum">
+          <h3 class="tier__label">Platinum</h3>
+          <ul class="tier__list" aria-label="17 platinum sponsors — logos to come">
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+          </ul>
+        </section>
+        <section class="tier tier--gold">
+          <h3 class="tier__label">Gold</h3>
+          <ul class="tier__list" aria-label="10 gold sponsors — logos to come">
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+          </ul>
+        </section>
+        <section class="tier tier--silver">
+          <h3 class="tier__label">Silver</h3>
+          <ul class="tier__list" aria-label="9 silver sponsors — logos to come">
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+            <li class="tier__item"><span class="tier__chip" aria-hidden="true"></span></li>
+          </ul>
+        </section>
+      </div>
+
+      <a class="btn btn--outline-dark sponsors__cta" href="#sponsors">View All Sponsors &rarr;</a>
     </div>
   </section>
 
@@ -316,7 +704,7 @@
           </div>
         </dl>
 
-        <a class="btn btn--primary" href="#pass" id="pass">Reserve Your Room &rarr;</a>
+        <a class="btn btn--primary" href="#venue">Reserve Your Room &rarr;</a>
       </div>
 
       <img class="venue__photo" src="assets/img/venue.jpg" alt="The host hotel and Las Vegas skyline at dusk" width="1200" height="800" loading="lazy">
@@ -346,7 +734,7 @@
 </main>
 
 <!-- ============================ Footer ============================ -->
-<footer class="site-footer">
+<footer class="site-footer section--bloom" id="contact">
   <div class="container">
     <div class="site-footer__cols">
       <div class="site-footer__brand">
@@ -358,8 +746,9 @@
         <h2 class="site-footer__heading">Vegas '27</h2>
         <ul class="site-footer__list">
           <li><a href="#who-attends">Who Attends</a></li>
-          <li><a href="#tracks">Tracks</a></li>
+          <li><a href="#agenda">Agenda</a></li>
           <li><a href="#speakers">Speakers</a></li>
+          <li><a href="#schedule">Schedule</a></li>
           <li><a href="#venue">Venue</a></li>
         </ul>
       </nav>
@@ -368,21 +757,26 @@
         <h2 class="site-footer__heading">Attend</h2>
         <ul class="site-footer__list">
           <li><a href="#register">Register</a></li>
-          <li><a href="#pass">Medicarians Pass</a></li>
-          <li><a href="#pass">Group Rates</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#insider">Group Rates</a></li>
+          <li><a href="#insider">Video Library</a></li>
           <li><a href="#insider">FAQ</a></li>
         </ul>
       </nav>
 
-      <nav class="site-footer__col" aria-label="Connect">
+      <div class="site-footer__col">
         <h2 class="site-footer__heading">Connect</h2>
         <ul class="site-footer__list">
-          <li><a href="#sponsor">Sponsor</a></li>
+          <li><a href="#sponsors">Sponsor</a></li>
           <li><a href="#speak">Apply to Speak</a></li>
-          <li><a href="#insider">Contact Us</a></li>
           <li><a href="#insider">LinkedIn</a></li>
         </ul>
-      </nav>
+        <ul class="site-footer__list site-footer__list--mail">
+          <li><a href="mailto:info@medicarians.com">info@medicarians.com</a></li>
+          <li><a href="mailto:sponsor@medicarians.com">sponsor@medicarians.com</a></li>
+          <li><a href="mailto:speaking@medicarians.com">speaking@medicarians.com</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="site-footer__bottom">
