@@ -256,6 +256,33 @@
 
   initSpeakerFold();
 
+  /* ------------------------------------------------------ Sponsor fold -- */
+  // Title, gold and silver stay on the page; the tiers below them fold away
+  // behind the CTA. Same progressive-enhancement contract as the speakers —
+  // ships open, JS closes it.
+  function initSponsorFold() {
+    var more = document.getElementById("sponsor-more");
+    var btn = document.getElementById("sponsors-toggle");
+    if (!more || !btn) return;
+
+    function setOpen(open) {
+      more.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.innerHTML = open ? "Show Fewer Sponsors &uarr;" : "View All Sponsors &rarr;";
+    }
+
+    setOpen(false);
+    btn.hidden = false;
+
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      setOpen(!open);
+      if (open) btn.scrollIntoView({ block: "center" });
+    });
+  }
+
+  initSponsorFold();
+
   /* ---------------------------------------------------------- Newsletter -- */
   // Prototype only — nothing is sent anywhere.
   var form = document.getElementById("newsletter-form");

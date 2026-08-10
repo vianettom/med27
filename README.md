@@ -48,10 +48,11 @@ existing patterns (`.section-head`, hairline card grids, `.eyebrow`/`.h2`):
   matching heights across their different aspect ratios rendered it at two different sizes.
 - **Schedule** — the four-day timetable, as day blocks with a label column and time/event rows.
   Weekdays check out against the 2027 calendar: April 11–14 really is Sunday–Wednesday.
-- **Sponsors** — Title / Platinum / Gold / Silver tiers, closed by a "View All Sponsors" CTA.
-  Deliberately still a placeholder: 37 blank chips, sized by tier so the ranking reads without
-  any names. The tier counts are real (1 / 17 / 10 / 9) and each list carries an `aria-label`
-  naming its count, since the chips themselves have no text.
+- **Sponsors** — one bordered plate per tier, badge pill on top, white logo cards inside, the
+  arrangement the live site uses. Title (18), Gold (10) and Silver (9) are the real logos;
+  Bronze and Category are blank cards and fold away behind the "View All Sponsors" CTA. Card
+  width steps down by tier (283 / 240 / 208px) so ranking reads without reading the badges, and
+  the fold is progressive enhancement — the markup ships open and `script.js` closes it.
 
 Note the live site's own homepage summary transposes Monday's and Wednesday's schedule content;
 the order here follows the live schedule proper, where the Kick-Off Party closes Monday, the
@@ -59,8 +60,8 @@ pre-conference day.
 
 Placeholder copy that has since been replaced with real content: the logo wall (30 named
 companies, 10 per marquee row), the speaker grid (26 real speakers), the audience cards (2–3 bullets each rather
-than one paragraph), and the footer's three contact addresses. The sponsor tiers are the one
-section left intentionally blank.
+than one paragraph), the footer's three contact addresses, and the sponsor tiers
+(real logos down to silver).
 
 ## Fonts
 
