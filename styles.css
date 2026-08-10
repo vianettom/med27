@@ -222,8 +222,11 @@ button { font: inherit; color: inherit; }
 .h3-lg--navy { color: var(--navy); }
 
 .section-head { max-width: 588px; }
-/* For headings the 588px cap breaks onto a third line. 720px is the narrowest
-   width that fits "There Is More to Medicarians Than Medicare." in two. */
+/* For headings the 588px cap breaks badly. 720px is the narrowest width that
+   fits "There Is More to Medicarians Than Medicare." in two lines, and it also
+   clears the 604px that "Medicarians 2027 Sponsors." needs to stay on one —
+   that heading only overflows the 588px cap once the clamp tops out at 48px,
+   i.e. at 1440px and wider. */
 .section-head--wide { max-width: 720px; }
 .section-head--center {
   margin-inline: auto;
@@ -290,6 +293,7 @@ button { font: inherit; color: inherit; }
 .btn--outline-light:hover { background: #fff; color: var(--navy); }
 
 .btn--outline-dark {
+  background: transparent; /* <button> would otherwise fall back to buttonface */
   border-color: var(--line-strong);
   color: var(--navy);
   font-weight: 800;
@@ -423,10 +427,12 @@ button { font: inherit; color: inherit; }
   object-fit: cover;
   object-position: center;
 }
+/* Light touch: the hero art is already a deep-navy gradient, so this only has to
+   settle the brighter cyan band rather than darken a photo. */
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: rgba(5, 17, 53, 0.8);
+  background: rgba(8, 0, 41, 0.50);
 }
 
 .hero__inner {
@@ -483,6 +489,28 @@ button { font: inherit; color: inherit; }
 }
 
 .hero__copy .btn { margin-top: 26px; }
+
+/* The one primary CTA on the page gets a slow cyan breath on top of the shared
+   blue drop shadow. Scoped to the hero so the header's Register button and the
+   in-page CTAs stay quiet — a glow only reads as emphasis while it's rare.
+
+   The 0% frame is the resting look. Reduced motion is handled explicitly at the
+   end of this file rather than by the blanket duration reset — see the note
+   there. The keyframes restate --shadow-blue because box-shadow animates as a
+   whole list; dropping it mid-cycle would make the button jump off its shadow. */
+@keyframes hero-cta-glow {
+  0%, 100% { box-shadow: var(--shadow-blue), 0 0 16px 0 rgba(107, 71, 218, 0.80); }
+  50%      { box-shadow: var(--shadow-blue), 0 0 30px 6px rgba(107, 71, 218, 0.80); }
+}
+.hero__copy .btn--primary {
+  animation: hero-cta-glow 3.2s ease-in-out infinite;
+}
+/* Hover already has its own lift and colour shift; the pulse on top of that
+   reads as flicker, so hold the bright frame steady while pointing at it. */
+.hero__copy .btn--primary:hover {
+  animation: none;
+  box-shadow: var(--shadow-blue), 0 0 20px 12px rgba(48, 65, 255, 0.30);
+}
 
 /* Hero stats */
 /* Same glass as the header. The fill is a top-to-bottom gradient rather than a
@@ -776,7 +804,9 @@ button { font: inherit; color: inherit; }
   padding: 56px 32px;
   border-radius: var(--r-md);
 }
-.banner--speak { background: linear-gradient(90deg, var(--blue-deep), var(--violet)); }
+.banner--speak {
+  background: linear-gradient(120deg, var(--magenta) 0%, var(--pink) 55%, var(--violet) 100%);
+}
 .banner--sponsor {
   margin-top: 0;
   background: linear-gradient(90deg, var(--blue-deep), var(--navy));
@@ -789,6 +819,8 @@ button { font: inherit; color: inherit; }
   color: #fff;
 }
 .banner__body--sm { font-size: 14px; max-width: 534px; }
+/* For the light gradient on --speak; the sponsor banner stays white on ink. */
+.banner__body--navy { color: var(--navy); }
 
 /* ========================================================== Speakers ====== */
 /* Flex rather than grid: 26 speakers don't divide evenly by any sensible column
@@ -867,11 +899,19 @@ button { font: inherit; color: inherit; }
   color: var(--ink-faint);
 }
 
+/* Collapsed, the grid shows four full rows and folds the rest behind the CTA.
+   The cut follows --cols, so each breakpoint restates it: 4 rows is 20 cards at
+   5 columns, 16 at 4, and so on. Rules only ever add hiding, never undo it, so
+   the narrower breakpoints just stack on top of this one. */
+.speaker-grid.is-collapsed .speaker-card:nth-child(n + 21) { display: none; }
+
 .speakers__cta {
   display: flex;
   width: fit-content;
   margin: 30px auto 0;
 }
+/* Beats the display:flex above so the no-JS `hidden` attribute still holds. */
+.speakers__cta[hidden] { display: none; }
 
 /* ========================================================== Schedule ====== */
 .schedule__days { margin-top: 40px; }
@@ -1292,6 +1332,7 @@ button { font: inherit; color: inherit; }
   }
 
   .speaker-grid { --cols: 4; }
+  .speaker-grid.is-collapsed .speaker-card:nth-child(n + 17) { display: none; }
   .venue__photo { flex-basis: 45%; width: 45%; height: 360px; }
 
   .day { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; }
@@ -1313,6 +1354,7 @@ button { font: inherit; color: inherit; }
 
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
   .speaker-grid { --cols: 3; }
+  .speaker-grid.is-collapsed .speaker-card:nth-child(n + 13) { display: none; }
 
   .program-grid { grid-template-columns: 1fr; gap: 16px; }
   .program-card__meta { margin-top: 20px; padding-top: 0; }
@@ -1405,6 +1447,7 @@ button { font: inherit; color: inherit; }
   .audience-card { min-height: 0; padding: 24px; }
 
   .speaker-grid { --cols: 2; --col-gap: 16px; gap: 20px var(--col-gap); }
+  .speaker-grid.is-collapsed .speaker-card:nth-child(n + 9) { display: none; }
   .speaker-card__name { font-size: 16px; }
 
   .program-card { padding: 24px; }
@@ -1464,5 +1507,15 @@ button { font: inherit; color: inherit; }
     overflow-x: auto;
     -webkit-mask-image: none;
     mask-image: none;
+  }
+
+  /* Same trap as the marquee, for the same reason. The duration reset above
+     doesn't stop an infinite animation, it runs it a million times a second —
+     the cycle gets resampled every frame. It happens to look still here only
+     because the 0% and 100% frames match; pin it to the calm frame instead of
+     relying on that. */
+  .hero__copy .btn--primary {
+    animation: none !important;
+    box-shadow: var(--shadow-blue), 0 0 16px 0 rgba(0, 202, 252, 0.25);
   }
 }

@@ -222,6 +222,40 @@
 
   initScheduleTabs();
 
+  /* ------------------------------------------------------ Speaker fold -- */
+  // Progressive enhancement: the markup ships expanded with the button hidden,
+  // so a JS failure leaves every speaker reachable rather than stranded.
+  function initSpeakerFold() {
+    var grid = document.getElementById("speaker-grid");
+    var btn = document.getElementById("speakers-toggle");
+    if (!grid || !btn) return;
+
+    function setOpen(open) {
+      grid.classList.toggle("is-collapsed", !open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.innerHTML = open ? "Show Fewer Speakers &uarr;" : "View All Speakers &rarr;";
+    }
+
+    // Where the four-row cut falls is a CSS decision that moves with the
+    // breakpoint, so ask the layout instead of counting cards here.
+    setOpen(false);
+    var cards = grid.querySelectorAll(".speaker-card");
+    if (!cards.length || cards[cards.length - 1].offsetParent !== null) {
+      setOpen(true); // Four rows or fewer — nothing to fold, so no button.
+      return;
+    }
+    btn.hidden = false;
+
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      setOpen(!open);
+      // Collapsing pulls the button up past the viewport; keep it under the cursor.
+      if (open) btn.scrollIntoView({ block: "center" });
+    });
+  }
+
+  initSpeakerFold();
+
   /* ---------------------------------------------------------- Newsletter -- */
   // Prototype only — nothing is sent anywhere.
   var form = document.getElementById("newsletter-form");
