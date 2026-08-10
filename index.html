@@ -88,20 +88,48 @@
        viewport — the embed is ~300KB of third-party JS and must not compete
        with the hero. Until then (and always on small screens / reduced
        motion) the poster below is what shows, so it has to stand on its own. -->
-  <section class="video-band" data-video-band data-vimeo="1192650758">
+  <section class="video-band" data-video-band data-vimeo="1217123547" data-vimeo-h="73c7abc99a">
     <div class="video-band__media">
-      <!-- Placeholder: the brand bloom art, standing in until there's a crowd
-           still to use. Vimeo's own thumbnail is a black title card whose
-           logo lands right behind this heading, so it can't serve here. -->
-      <img class="video-band__poster" src="assets/img/hero.jpg" alt=""
-           width="2560" height="1705" loading="lazy" decoding="async">
+      <!-- A still pulled from the reel itself, so the poster and the first
+           frame agree. Vimeo's own thumbnail is a black title card whose logo
+           lands right behind this heading, so it can't serve here. This is
+           what shows on small screens and under reduced motion, where the
+           player is never injected — it has to stand on its own. -->
+      <img class="video-band__poster" src="assets/img/video-poster.jpg" alt=""
+           width="1920" height="1080" loading="lazy" decoding="async">
     </div>
     <div class="video-band__wash"></div>
 
     <div class="container">
       <h2 class="h2 h2--light video-band__title">Where the Senior Health &amp; Wealth Distribution Ecosystem Connects and Grows.</h2>
+      <!-- The full film, not the short loop playing behind this band. A real
+           link, so it still works with JS off — script.js upgrades it into the
+           dialog below, reading the video off this href so the two can't drift
+           apart, and only then stops the navigation. -->
+      <p class="video-band__actions">
+        <a class="btn btn--outline-light video-band__cta" data-video-open
+           href="https://vimeo.com/1192650758">
+          <svg class="video-band__cta-icon" viewBox="0 0 12 14" width="12" height="14"
+               aria-hidden="true" focusable="false">
+            <path d="M11.5 6.13a1 1 0 0 1 0 1.74l-9.5 5.5A1 1 0 0 1 .5 12.5v-11A1 1 0 0 1 2 .63l9.5 5.5Z" fill="currentColor"/>
+          </svg>
+          Watch Video
+        </a>
+      </p>
     </div>
   </section>
+
+  <!-- Lives outside the band so the backdrop covers the page, not the section.
+       The iframe is injected on open and torn out on close — that is what stops
+       the audio, and it keeps the full-fat player off the initial load. -->
+  <dialog class="video-modal" id="video-modal" aria-label="Medicarians 2026 video">
+    <button class="video-modal__close" type="button" data-video-close aria-label="Close video">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M1 1l14 14M15 1L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="video-modal__frame" data-video-mount></div>
+  </dialog>
 
   <!-- ======================= Logo wall / Who attends ======================= -->
   <section class="section section--tint logo-wall" id="who-attends">

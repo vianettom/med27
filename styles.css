@@ -636,6 +636,72 @@ button { font: inherit; color: inherit; }
   text-align: center;
 }
 
+.video-band__actions {
+  margin: 28px 0 0;
+  text-align: center;
+}
+/* The wash sits on -1, so the button needs its own stacking context to stay
+   clickable and un-tinted. */
+.video-band__cta {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+}
+.video-band__cta-icon { flex: none; }
+
+/* ======================================================== Video modal ===== */
+/* Width is capped by height too, so the 16:9 panel and its close button always
+   fit a short viewport instead of running off the bottom. */
+.video-modal {
+  width: min(
+    1100px,
+    calc(100vw - 2 * var(--gutter)),
+    calc((100vh - 120px) * 16 / 9)
+  );
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible; /* the close button hangs above the panel on desktop */
+}
+.video-modal::backdrop {
+  background: rgba(8, 0, 41, 0.82);
+  backdrop-filter: blur(4px);
+}
+
+.video-modal__frame {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+}
+.video-modal__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-modal__close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.video-modal__close:hover { background: rgba(255, 255, 255, 0.28); }
+
 /* ========================================================= Logo wall ====== */
 .logo-wall { padding-block: 64px; }
 
@@ -1597,6 +1663,15 @@ a.sponsor-card:focus-visible {
   .video-band {
     min-height: 260px;
     padding-block: 48px;
+  }
+  .video-band__actions { margin-top: 22px; }
+  .video-band__cta { width: 100%; }
+
+  /* No room to park the close button above the panel on a phone, so it moves
+     inside the top-right corner of the video. */
+  .video-modal__close {
+    inset: 10px 10px auto auto;
+    background: rgba(8, 0, 41, 0.6);
   }
 
   .hero { padding-block: calc(var(--header-h) + 56px) 48px; }

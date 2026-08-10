@@ -138,6 +138,10 @@
     var id = band.getAttribute("data-vimeo");
     if (!id) return;
 
+    // Unlisted videos carry a privacy hash; without it the embed 404s.
+    var hash = band.getAttribute("data-vimeo-h");
+    var privacy = hash ? "&h=" + encodeURIComponent(hash) : "";
+
     var load = function () {
       if (band.querySelector(".video-band__frame")) return;
       if (reduceMotion.matches || narrow.matches) return;
@@ -147,9 +151,9 @@
       // mute in one go; autopause=0 keeps it running if another Vimeo embed
       // ever lands on the page.
       frame.src = "https://player.vimeo.com/video/" + id +
-        "?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1";
+        "?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" + privacy;
       frame.className = "video-band__frame";
-      frame.title = "Medicarians 2026 sizzle reel";
+      frame.title = "Medicarians 2026 ambient loop";
       frame.setAttribute("frameborder", "0");
       frame.setAttribute("allow", "autoplay; fullscreen");
       frame.setAttribute("aria-hidden", "true");
@@ -196,6 +200,80 @@
   }
 
   initVideoBand();
+
+  /* ---------------------------------------------------------- Video modal -- */
+  // The "Watch Video" link is real markup pointing at Vimeo, so it works with
+  // JS off. Here it's upgraded into a <dialog> playing the same video with
+  // sound and controls. The iframe is created on open and removed on close —
+  // removing it is what actually stops playback.
+  function initVideoModal() {
+    var modal = document.getElementById("video-modal");
+    var opener = document.querySelector("[data-video-open]");
+    var band = document.querySelector("[data-video-band]");
+    if (!modal || !opener || !band) return;
+
+    // Older browsers without the top-layer dialog keep the plain link.
+    if (typeof modal.showModal !== "function") return;
+
+    var mount = modal.querySelector("[data-video-mount]");
+    if (!mount) return;
+
+    // The full film, which is a different (longer) cut from the muted loop
+    // behind the band. Read off the link's own href — that keeps the JS-off
+    // destination and what the dialog plays from ever drifting apart. Second
+    // capture is the privacy hash unlisted videos carry.
+    var parts = /vimeo\.com\/(\d+)(?:\/(\w+))?/.exec(opener.getAttribute("href") || "");
+    if (!parts) return;
+
+    var id = parts[1];
+    var hash = parts[2];
+
+    // The muted loop behind the band would otherwise keep streaming under the
+    // backdrop while the real player runs. Vimeo takes pause/play over
+    // postMessage, so no player SDK is needed for this.
+    function tellBackground(method) {
+      var bg = band.querySelector(".video-band__frame");
+      if (!bg || !bg.contentWindow) return;
+      bg.contentWindow.postMessage({ method: method }, "https://player.vimeo.com");
+    }
+
+    function open(event) {
+      if (event) event.preventDefault();
+
+      var frame = document.createElement("iframe");
+      frame.src = "https://player.vimeo.com/video/" + id +
+        "?autoplay=1&dnt=1" + (hash ? "&h=" + encodeURIComponent(hash) : "");
+      frame.title = "Medicarians 2026 Sizzle Video";
+      frame.setAttribute("frameborder", "0");
+      frame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+      frame.setAttribute("allowfullscreen", "");
+
+      mount.appendChild(frame);
+      tellBackground("pause");
+      modal.showModal();
+    }
+
+    opener.addEventListener("click", open);
+
+    modal.querySelector("[data-video-close]").addEventListener("click", function () {
+      modal.close();
+    });
+
+    // Click-outside: the dialog element itself is only the backdrop area, so a
+    // click landing on it (rather than on a child) means outside the panel.
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) modal.close();
+    });
+
+    // Fires for the close button, the backdrop click and Esc alike.
+    modal.addEventListener("close", function () {
+      mount.innerHTML = "";
+      tellBackground("play");
+      opener.focus();
+    });
+  }
+
+  initVideoModal();
 
   /* ------------------------------------------------------ Schedule tabs --- */
   // Progressive enhancement: the markup is four plain day blocks, which is what
