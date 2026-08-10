@@ -1026,10 +1026,13 @@ button { font: inherit; color: inherit; }
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  /* Headshots are pulled at mixed aspect ratios; bias the square crop upward
+     so faces stay in frame. */
+  object-position: 50% 25%;
+  background: rgba(2, 129, 251, 0.08);
 }
 
-/* Only one real headshot has been sourced. The rest get a monogram rather than
-   that person's face repeated under 25 other people's names. */
+/* Kept as a fallback for speakers added before a headshot is sourced. */
 .speaker-card__photo--ph {
   display: flex;
   align-items: center;
