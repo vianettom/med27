@@ -566,6 +566,76 @@ button { font: inherit; color: inherit; }
   color: #fff;
 }
 
+/* ====================================================== Video statement ===
+   A full-bleed band with the sizzle reel running silently behind the line.
+   Three stacked layers: poster/iframe, the violet wash, then the copy. */
+.video-band {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 420px;
+  padding-block: 72px;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.video-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.video-band__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* A 16:9 iframe can't be told to `cover` a short wide band, so it is sized to
+   whichever of the two axes overflows and then centred — the standard trick.
+   pointer-events:none keeps the player from swallowing clicks and drags. */
+.video-band__frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+
+  /* Held back until the player reports it is playing. A blocked embed — ad
+     blocker, firewall, offline — paints an opaque error page that would
+     otherwise sit over the poster and leave the band flat black. */
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.video-band.is-playing .video-band__frame { opacity: 1; }
+
+/* The duotone in the design: multiply flattens the footage into the violet,
+   then the flat tint on top holds contrast where the frame goes bright. */
+.video-band__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(8, 0, 41, 0.28), rgba(8, 0, 41, 0.28)),
+    var(--violet);
+  mix-blend-mode: multiply;
+}
+
+/* The band is one sentence, so it gets the full container rather than the
+   588px cap the section headers elsewhere use. */
+.video-band__title {
+  margin-top: 0;
+  max-width: 1100px;
+  margin-inline: auto;
+  text-align: center;
+}
+
 /* ========================================================= Logo wall ====== */
 .logo-wall { padding-block: 64px; }
 
@@ -1459,6 +1529,11 @@ a.sponsor-card:focus-visible {
   .sponsors { padding-bottom: 48px; }
   .sponsor { padding-top: 20px; }
 
+  .video-band {
+    min-height: 300px;
+    padding-block: 56px;
+  }
+
   .hero {
     min-height: 0;
     padding-block: calc(var(--header-h) + 72px) 56px;
@@ -1518,6 +1593,11 @@ a.sponsor-card:focus-visible {
   .section--slim { padding-block: 48px; }
   .sponsors { padding-bottom: 40px; }
   .sponsor { padding-top: 16px; }
+
+  .video-band {
+    min-height: 260px;
+    padding-block: 48px;
+  }
 
   .hero { padding-block: calc(var(--header-h) + 56px) 48px; }
   .hero__copy .btn,
@@ -1610,6 +1690,10 @@ a.sponsor-card:focus-visible {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+
+  /* script.js already declines to inject the player here. This is the backstop
+     for a preference switched on after load, when the iframe is already in. */
+  .video-band__frame { display: none; }
 
   /* Zeroing the duration would leave the marquee parked at its end state,
      mid-loop. Stop it outright and hand the row over to the user to scroll,

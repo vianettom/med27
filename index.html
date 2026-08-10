@@ -35,7 +35,7 @@
         <li><a href="#venue">Venue</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a class="btn btn--primary btn--sm site-nav__cta" href="#register">Register &rarr;</a>
+      <a class="btn btn--primary btn--sm site-nav__cta" href="#register">Register</a>
     </nav>
   </div>
 </header>
@@ -55,7 +55,7 @@
         <h1 class="hero__title">The Home of Senior Health &amp; Wealth Distribution</h1>
         <p class="hero__date">April 12–14, 2027 · Caesars Forum · Las Vegas</p>
         <p class="hero__lede">Medicarians is the single largest gathering of senior health and wealth distribution professionals, bringing together the entire value chain, including agents and agency owners, product creators, care providers and plans, investors, and innovators—all under one roof.</p>
-        <a class="btn btn--primary" href="#register" id="register">Register Now &rarr;</a>
+        <a class="btn btn--primary" href="#register" id="register">Register Now</a>
       </div>
 
       <dl class="stats">
@@ -83,13 +83,33 @@
     </div>
   </section>
 
+  <!-- ============================ Video statement =========================
+       The Vimeo player is injected by script.js once the band nears the
+       viewport — the embed is ~300KB of third-party JS and must not compete
+       with the hero. Until then (and always on small screens / reduced
+       motion) the poster below is what shows, so it has to stand on its own. -->
+  <section class="video-band" data-video-band data-vimeo="1192650758">
+    <div class="video-band__media">
+      <!-- Placeholder: the brand bloom art, standing in until there's a crowd
+           still to use. Vimeo's own thumbnail is a black title card whose
+           logo lands right behind this heading, so it can't serve here. -->
+      <img class="video-band__poster" src="assets/img/hero.jpg" alt=""
+           width="2560" height="1705" loading="lazy" decoding="async">
+    </div>
+    <div class="video-band__wash"></div>
+
+    <div class="container">
+      <h2 class="h2 h2--light video-band__title">Where the Senior Health &amp; Wealth Distribution Ecosystem Connects and Grows.</h2>
+    </div>
+  </section>
+
   <!-- ======================= Logo wall / Who attends ======================= -->
   <section class="section section--tint logo-wall" id="who-attends">
     <div class="container">
       <div class="section-head section-head--center">
         <p class="eyebrow eyebrow--blue">Who Attends</p>
-        <h2 class="h2">Where the Senior Health &amp; Wealth Distribution Ecosystem Connects and Grows.</h2>
-        <p class="section-head__lede">Just a few companies who attended Medicarians Vegas 2026.</p>
+        <h2 class="h2">Companies Who Attended Medicarians.</h2>
+        <p class="section-head__lede">A selection of the organizations on the floor at Vegas 2026.</p>
       </div>
     </div>
 
@@ -172,7 +192,7 @@
     </div>
 
     <div class="container">
-      <a class="btn btn--outline-dark logo-wall__cta" href="#who-attends">See All Who Attended &rarr;</a>
+      <a class="btn btn--outline-dark logo-wall__cta" href="#who-attends">See All Who Attended</a>
     </div>
   </section>
 
@@ -273,7 +293,7 @@
           <h2 class="h3-lg h3-lg--navy">Apply to Speak.</h2>
           <p class="banner__body banner__body--navy">We are programming 100+ sessions across three tracks, and we want the people actually shaping senior health and wealth distribution on stage.</p>
         </div>
-        <a class="btn btn--deep" href="#speak">Apply to Speak &rarr;</a>
+        <a class="btn btn--deep" href="#speak">Apply to Speak</a>
       </div>
     </div>
   </section>
@@ -500,7 +520,7 @@
 
       <!-- No-JS default is every speaker visible; script.js collapses the grid. -->
       <button class="btn btn--outline-dark speakers__cta" id="speakers-toggle" type="button"
-              aria-controls="speaker-grid" aria-expanded="true" hidden>View All Speakers &rarr;</button>
+              aria-controls="speaker-grid" aria-expanded="true" hidden>View All Speakers</button>
     </div>
   </section>
 
@@ -746,7 +766,7 @@
 
       <!-- No-JS default is every tier visible; script.js collapses the extras. -->
       <button class="btn btn--outline-dark sponsors__cta" id="sponsors-toggle" type="button"
-              aria-controls="sponsor-more" aria-expanded="true" hidden>View All Sponsors &rarr;</button>
+              aria-controls="sponsor-more" aria-expanded="true" hidden>View All Sponsors</button>
     </div>
   </section>
 
@@ -759,7 +779,7 @@
           <h2 class="h3-lg">Sponsor Medicarians Vegas 2027.</h2>
           <p class="banner__body banner__body--sm">From thought leadership to networking and branding, Medicarians has packages to fit almost every need and budget.</p>
         </div>
-        <a class="btn btn--outline-light" href="#sponsor">Request Prospectus &rarr;</a>
+        <a class="btn btn--outline-light" href="#sponsor">Request Prospectus</a>
       </div>
     </div>
   </section>
@@ -881,7 +901,7 @@
           </div>
         </dl>
 
-        <a class="btn btn--primary" href="#venue">Reserve Your Room &rarr;</a>
+        <a class="btn btn--primary" href="#venue">Reserve Your Room</a>
       </div>
 
       <img class="venue__photo" src="assets/img/venue.jpg" alt="The host hotel and Las Vegas skyline at dusk" width="1200" height="800" loading="lazy">
@@ -901,7 +921,7 @@
         <div class="newsletter__row">
           <label class="visually-hidden" for="newsletter-email">Email address</label>
           <input class="newsletter__input" id="newsletter-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required>
-          <button class="btn btn--deep" type="submit">Subscribe &rarr;</button>
+          <button class="btn btn--deep" type="submit">Subscribe</button>
         </div>
         <p class="newsletter__note">Unsubscribe anytime. We never share or sell your data.</p>
       </form>

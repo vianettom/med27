@@ -125,6 +125,78 @@
 
   initCounters();
 
+  /* ----------------------------------------------------- Video statement -- */
+  // The Vimeo player costs ~300KB of third-party JS, so it is only injected
+  // once the band is close to view, and never on small screens or under
+  // reduced motion — the poster in the markup covers all three cases.
+  var narrow = window.matchMedia("(max-width: 900px)");
+
+  function initVideoBand() {
+    var band = document.querySelector("[data-video-band]");
+    if (!band) return;
+
+    var id = band.getAttribute("data-vimeo");
+    if (!id) return;
+
+    var load = function () {
+      if (band.querySelector(".video-band__frame")) return;
+      if (reduceMotion.matches || narrow.matches) return;
+
+      var frame = document.createElement("iframe");
+      // background=1 is what strips the chrome and makes it autoplay, loop and
+      // mute in one go; autopause=0 keeps it running if another Vimeo embed
+      // ever lands on the page.
+      frame.src = "https://player.vimeo.com/video/" + id +
+        "?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1";
+      frame.className = "video-band__frame";
+      frame.title = "Medicarians 2026 sizzle reel";
+      frame.setAttribute("frameborder", "0");
+      frame.setAttribute("allow", "autoplay; fullscreen");
+      frame.setAttribute("aria-hidden", "true");
+      frame.setAttribute("tabindex", "-1");
+
+      band.querySelector(".video-band__media").appendChild(frame);
+
+      // The player talks back over postMessage. We subscribe to "play" on
+      // ready, and only then fade the iframe in over the poster — so a
+      // blocked or failed embed leaves the poster showing instead of its
+      // error page. Origin-checked because this listens on window.
+      window.addEventListener("message", function (event) {
+        if (event.origin !== "https://player.vimeo.com") return;
+        if (event.source !== frame.contentWindow) return;
+
+        var data = event.data;
+        if (typeof data === "string") {
+          try { data = JSON.parse(data); } catch (err) { return; }
+        }
+        if (!data) return;
+
+        if (data.event === "ready") {
+          frame.contentWindow.postMessage(
+            { method: "addEventListener", value: "play" }, "https://player.vimeo.com");
+        } else if (data.event === "play") {
+          band.classList.add("is-playing");
+        }
+      });
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      load();
+      return;
+    }
+
+    // 400px of lead time so the first frame is up before the band is read.
+    var observer = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      load();
+    }, { rootMargin: "400px 0px" });
+
+    observer.observe(band);
+  }
+
+  initVideoBand();
+
   /* ------------------------------------------------------ Schedule tabs --- */
   // Progressive enhancement: the markup is four plain day blocks, which is what
   // you get with JS off. Here they're upgraded into a tablist so only one day
@@ -233,7 +305,7 @@
     function setOpen(open) {
       grid.classList.toggle("is-collapsed", !open);
       btn.setAttribute("aria-expanded", String(open));
-      btn.innerHTML = open ? "Show Fewer Speakers &uarr;" : "View All Speakers &rarr;";
+      btn.innerHTML = open ? "Show Fewer Speakers" : "View All Speakers";
     }
 
     // Where the four-row cut falls is a CSS decision that moves with the
@@ -268,7 +340,7 @@
     function setOpen(open) {
       more.hidden = !open;
       btn.setAttribute("aria-expanded", String(open));
-      btn.innerHTML = open ? "Show Fewer Sponsors &uarr;" : "View All Sponsors &rarr;";
+      btn.innerHTML = open ? "Show Fewer Sponsors" : "View All Sponsors";
     }
 
     setOpen(false);
