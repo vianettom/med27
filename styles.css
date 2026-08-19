@@ -1090,6 +1090,13 @@ button { font: inherit; color: inherit; }
 /* ========================================================== Schedule ====== */
 .schedule__days { margin-top: 40px; }
 
+/* Left-aligned under the lede — this section-head has no `--center` modifier. */
+.schedule__cta {
+  display: flex;
+  width: fit-content;
+  margin-block: 16px;
+}
+
 /* --- Day tabs -----------------------------------------------------------
    Built by script.js. Without it every day stays stacked and visible, so
    everything below is scoped to .is-tabbed. The cyan underline is the same
@@ -1412,6 +1419,263 @@ a.sponsor-card:focus-visible {
   color: var(--ink-faint);
 }
 
+/* ===================================================== Venue page ========= */
+/* Everything below is only used by venue.html. The page reuses the home page's
+   section, heading, eyebrow and button primitives wholesale — these rules just
+   add the four blocks the home page has no equivalent for: a shorter hero, the
+   scam notice, the travel pair and the hotel cards. */
+
+/* The home hero is a 995px full-bleed statement. A subpage doesn't earn that
+   height, so this drops the floor and lets the copy set the height instead. */
+.hero--page {
+  min-height: 0;
+  padding-block: calc(var(--header-h) + 88px) 88px;
+}
+.hero--page .hero__title {
+  max-width: 720px;
+  font-size: clamp(30px, 4.4vw, 56px);
+}
+.hero--page .eyebrow { margin-bottom: 18px; }
+
+.hero__note {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--cyan);
+}
+
+/* Coral rule rather than a full tinted panel — this warning appears twice on
+   the page and a boxed treatment both times reads as two error states. */
+.notice {
+  max-width: 900px;
+  margin-top: 40px;
+  padding-left: 20px;
+  border-left: 3px solid var(--coral);
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--ink-muted);
+}
+.section--slim .notice { margin-top: 0; }
+
+/* ------------------------------------------------------------ Welcome ---- */
+/* Image left, copy right — the mirror of the home page's venue block, which
+   runs copy left. The copy column takes the larger share because the scam
+   notice underneath it is the long element here. */
+.welcome__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* Dashed rather than solid so it reads as "art pending" and not as a framed
+   photo that failed to load. */
+.welcome__media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--r-md);
+}
+.welcome__media-label {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+/* Ready for the real thing: same slot, same corners. */
+.welcome__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-md);
+}
+
+/* ------------------------------------------------------------- Travel ---- */
+/* Cards stacked in the left column, map filling the right. */
+.travel__inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.travel-grid {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+
+/* The map is square but the column it fills is not, so the img is taken out of
+   flow and told to cover — otherwise its intrinsic 1:1 height would set the row
+   and leave the cards floating against a much taller column. Cropping the top
+   and bottom is what we want anyway: the pins and labels sit in the middle
+   band, and the edges are empty road. */
+.travel__map {
+  position: relative;
+  min-height: 320px;
+}
+.travel__map-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-md);
+}
+/* Sits on navy, so the card is a translucent pane rather than the white one the
+   programme cards use — same trick as the header glass, minus the blur. */
+.travel-card {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-md);
+}
+/* The source PNGs are line art in a violet→magenta gradient, which goes muddy
+   against navy. Masking throws their colour away and paints the alpha channel
+   in a palette token instead, so the colour is a one-line change on
+   --travel-icon rather than a new export. */
+.travel-card__icon {
+  --travel-icon: var(--cyan);
+  display: block;
+  height: 44px;
+  background-color: var(--travel-icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+/* Aspect ratios are the source PNGs' own, so the mask fills the box exactly. */
+.travel-card__icon--arrive {
+  aspect-ratio: 122 / 88;
+  -webkit-mask-image: url("assets/img/plane-arrival.png");
+  mask-image: url("assets/img/plane-arrival.png");
+}
+.travel-card__icon--depart {
+  aspect-ratio: 113 / 88;
+  -webkit-mask-image: url("assets/img/plane-departure.png");
+  mask-image: url("assets/img/plane-departure.png");
+}
+.travel-card__title {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 26.4px;
+  letter-spacing: -0.33px;
+  color: #fff;
+}
+.travel-card__body {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 25.6px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ------------------------------------------------------------- Hotels ---- */
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.hotel-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+}
+.hotel-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.hotel-card__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+.hotel-card__tier {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* The rate and the cut-off are the two things people scan for, so they're
+   lifted out of the paragraph — which still carries them in full — and set as
+   figures, matching the .venue-stat pattern on the home page. */
+.hotel-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-block: 24px;
+  padding-block: 24px;
+  border-block: 1px solid var(--line);
+}
+.hotel-fact__label {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.hotel-fact__value {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -1.08px;
+  color: var(--navy);
+}
+.hotel-fact__note {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 18.2px;
+  color: var(--ink-faint);
+}
+
+.hotel-card__body {
+  font-size: 16px;
+  line-height: 25.6px;
+  color: var(--ink-muted);
+}
+/* margin-top:auto pins this to the card floor so the two cards' phone numbers
+   line up even though the descriptions differ in length. */
+.hotel-card__meta {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-faint);
+}
+.hotel-card__meta a {
+  color: var(--blue);
+  font-weight: 700;
+}
+.hotel-card__meta a:hover { text-decoration: underline; }
+
 /* ======================================================== Newsletter ====== */
 .newsletter { background: var(--cyan); }
 .newsletter__inner {
@@ -1618,6 +1882,19 @@ a.sponsor-card:focus-visible {
   .program-grid { grid-template-columns: 1fr; gap: 16px; }
   .program-card__meta { margin-top: 20px; padding-top: 0; }
 
+  /* Copy first once stacked — a placeholder shouldn't be the first thing on
+     the section. */
+  .welcome__inner { grid-template-columns: 1fr; gap: 32px; }
+  .welcome__media { order: 2; }
+  .welcome__copy { order: 1; }
+
+  .travel__inner,
+  .hotel-grid { grid-template-columns: 1fr; gap: 16px; }
+  .travel-grid { gap: 16px; }
+  /* Stacked, there's no sibling column to borrow a height from, so the map
+     goes back to setting its own. */
+  .travel__map { min-height: 0; aspect-ratio: 4 / 3; }
+
   .day {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
@@ -1681,6 +1958,7 @@ a.sponsor-card:focus-visible {
   .hero__copy .btn,
   .speakers__cta,
   .logo-wall__cta,
+  .schedule__cta,
   .sponsors__cta { width: 100%; }
 
   /* 2×2 rather than a single column — four stacked stats pushed the hero CTA
@@ -1726,6 +2004,13 @@ a.sponsor-card:focus-visible {
   .speaker-card__name { font-size: 16px; }
 
   .program-card { padding: 24px; }
+
+  .travel-card,
+  .hotel-card { padding: 24px; }
+  /* The Book Now pill and a two-line hotel name fight for the same row here. */
+  .hotel-card__head { flex-direction: column; gap: 16px; }
+  .hotel-facts { gap: 24px; margin-block: 20px; padding-block: 20px; }
+  .hotel-fact__value { font-size: 30px; }
 
   .day__row {
     grid-template-columns: minmax(0, 1fr);
