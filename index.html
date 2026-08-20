@@ -302,18 +302,18 @@
         <p class="section-head__lede section-head__lede--light">A preview of what 325+ leaders will cover across keynotes, panels and workshops.</p>
       </div>
 
-      <ol class="topics" id="tracks">
-        <li class="topic"><span class="topic__num">01</span><span class="topic__title">The CMS 2027 MA/PD Proposed Rule: What it Means for Agents &amp; Our Industry</span></li>
-        <li class="topic"><span class="topic__num">02</span><span class="topic__title">The Rise of Non-Commissioned Products</span></li>
-        <li class="topic"><span class="topic__num">03</span><span class="topic__title">ICHRA: Overview and How Medicare Agents Can Get Started</span></li>
-        <li class="topic"><span class="topic__num">04</span><span class="topic__title">Changes at CMS and What Carriers &amp; Distributors Can Expect</span></li>
-        <li class="topic"><span class="topic__num">05</span><span class="topic__title">Beyond an MA-Only Agent: Diversifying Your Business &amp; Becoming a Holistic Advisor</span></li>
-        <li class="topic"><span class="topic__num">06</span><span class="topic__title">Ancillary Products On the Rise</span></li>
-        <li class="topic"><span class="topic__num">07</span><span class="topic__title">Extended Care: Picking Up Where Medicare Leaves Off</span></li>
-        <li class="topic"><span class="topic__num">08</span><span class="topic__title">Leveraging AI without Losing the Human Touch</span></li>
-        <li class="topic"><span class="topic__num">09</span><span class="topic__title">ACA for Beginners</span></li>
-        <li class="topic"><span class="topic__num">10</span><span class="topic__title">Agency Owners: Preparing for Your Next Level of Growth</span></li>
-      </ol>
+      <ul class="topics" id="tracks">
+        <li class="topic"><span class="topic__title">The CMS 2027 MA/PD Proposed Rule: What it Means for Agents &amp; Our Industry</span></li>
+        <li class="topic"><span class="topic__title">The Rise of Non-Commissioned Products</span></li>
+        <li class="topic"><span class="topic__title">ICHRA: Overview and How Medicare Agents Can Get Started</span></li>
+        <li class="topic"><span class="topic__title">Changes at CMS and What Carriers &amp; Distributors Can Expect</span></li>
+        <li class="topic"><span class="topic__title">Beyond an MA-Only Agent: Diversifying Your Business &amp; Becoming a Holistic Advisor</span></li>
+        <li class="topic"><span class="topic__title">Ancillary Products On the Rise</span></li>
+        <li class="topic"><span class="topic__title">Extended Care: Picking Up Where Medicare Leaves Off</span></li>
+        <li class="topic"><span class="topic__title">Leveraging AI without Losing the Human Touch</span></li>
+        <li class="topic"><span class="topic__title">ACA for Beginners</span></li>
+        <li class="topic"><span class="topic__title">Agency Owners: Preparing for Your Next Level of Growth</span></li>
+      </ul>
 
       <div class="banner banner--speak" id="speak">
         <div class="banner__copy">
@@ -949,19 +949,32 @@
           </div>
         </dl>
 
-        <a class="btn btn--primary" href="venue.html">Reserve Your Room</a>
+        <div class="venue__actions">
+          <!-- No href yet — the room block link isn't live. -->
+          <a class="btn btn--primary">Reserve Your Room</a>
+          <a class="btn btn--white" href="venue.html">Learn More</a>
+        </div>
       </div>
 
       <img class="venue__photo" src="assets/img/venue.jpg" alt="The host hotel and Las Vegas skyline at dusk" width="1200" height="800" loading="lazy">
     </div>
   </section>
 
+</main>
+
+<!-- ==================== Closing plate (newsletter + footer) ====================
+     One navy plate carrying a single bloom layer behind both blocks. Painting
+     the bloom on each section separately restarted the gradient at the seam,
+     which read as a hard band; here the only thing marking the join is the
+     hairline rule on the footer. -->
+<div class="closing section--bloom">
+
   <!-- ============================ Newsletter ============================ -->
   <section class="section section--slim newsletter" id="insider">
     <div class="container newsletter__inner">
       <div class="newsletter__copy">
-        <p class="eyebrow eyebrow--navy">Stay Informed</p>
-        <h2 class="h3-lg h3-lg--navy">Become an Insider.</h2>
+        <p class="eyebrow eyebrow--cyan">Stay Informed</p>
+        <h2 class="h3-lg">Become an Insider.</h2>
         <p class="newsletter__body">No more than twice-monthly emails with updates on speakers, topics and exclusive discounts.</p>
       </div>
 
@@ -969,68 +982,68 @@
         <div class="newsletter__row">
           <label class="visually-hidden" for="newsletter-email">Email address</label>
           <input class="newsletter__input" id="newsletter-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required>
-          <button class="btn btn--deep" type="submit">Subscribe</button>
+          <button class="btn btn--primary" type="submit">Subscribe</button>
         </div>
         <p class="newsletter__note">Unsubscribe anytime. We never share or sell your data.</p>
       </form>
     </div>
   </section>
 
-</main>
+  <!-- ============================ Footer ============================ -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="site-footer__cols">
+        <div class="site-footer__brand">
+          <p class="site-footer__blurb">The home of senior health and wealth distribution. The entire value chain under one roof.</p>
+          <p class="site-footer__date">April 12–14, 2027 · Caesars Forum</p>
+        </div>
 
-<!-- ============================ Footer ============================ -->
-<footer class="site-footer section--bloom" id="contact">
-  <div class="container">
-    <div class="site-footer__cols">
-      <div class="site-footer__brand">
-        <p class="site-footer__blurb">The home of senior health and wealth distribution. The entire value chain under one roof.</p>
-        <p class="site-footer__date">April 12–14, 2027 · Caesars Forum</p>
+        <nav class="site-footer__col" aria-label="Vegas '27">
+          <h2 class="site-footer__heading">Vegas '27</h2>
+          <ul class="site-footer__list">
+            <li><a href="#who-attends">Who Attends</a></li>
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#speakers">Speakers</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#venue">Venue</a></li>
+          </ul>
+        </nav>
+
+        <nav class="site-footer__col" aria-label="Attend">
+          <h2 class="site-footer__heading">Attend</h2>
+          <ul class="site-footer__list">
+            <li><a href="#register">Register</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#insider">Group Rates</a></li>
+            <li><a href="#insider">Video Library</a></li>
+            <li><a href="#insider">FAQ</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__col">
+          <h2 class="site-footer__heading">Connect</h2>
+          <ul class="site-footer__list">
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#sponsors">Sponsor</a></li>
+            <li><a href="#speak">Apply to Speak</a></li>
+            <li><a href="#insider">LinkedIn</a></li>
+          </ul>
+          <ul class="site-footer__list site-footer__list--mail">
+            <li><a href="mailto:info@medicarians.com">info@medicarians.com</a></li>
+            <li><a href="mailto:sponsor@medicarians.com">sponsor@medicarians.com</a></li>
+            <li><a href="mailto:speaking@medicarians.com">speaking@medicarians.com</a></li>
+          </ul>
+        </div>
       </div>
 
-      <nav class="site-footer__col" aria-label="Vegas '27">
-        <h2 class="site-footer__heading">Vegas '27</h2>
-        <ul class="site-footer__list">
-          <li><a href="#who-attends">Who Attends</a></li>
-          <li><a href="#agenda">Agenda</a></li>
-          <li><a href="#speakers">Speakers</a></li>
-          <li><a href="#schedule">Schedule</a></li>
-          <li><a href="#venue">Venue</a></li>
-        </ul>
-      </nav>
-
-      <nav class="site-footer__col" aria-label="Attend">
-        <h2 class="site-footer__heading">Attend</h2>
-        <ul class="site-footer__list">
-          <li><a href="#register">Register</a></li>
-          <li><a href="#programs">Programs</a></li>
-          <li><a href="#insider">Group Rates</a></li>
-          <li><a href="#insider">Video Library</a></li>
-          <li><a href="#insider">FAQ</a></li>
-        </ul>
-      </nav>
-
-      <div class="site-footer__col">
-        <h2 class="site-footer__heading">Connect</h2>
-        <ul class="site-footer__list">
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="#sponsors">Sponsor</a></li>
-          <li><a href="#speak">Apply to Speak</a></li>
-          <li><a href="#insider">LinkedIn</a></li>
-        </ul>
-        <ul class="site-footer__list site-footer__list--mail">
-          <li><a href="mailto:info@medicarians.com">info@medicarians.com</a></li>
-          <li><a href="mailto:sponsor@medicarians.com">sponsor@medicarians.com</a></li>
-          <li><a href="mailto:speaking@medicarians.com">speaking@medicarians.com</a></li>
-        </ul>
+      <div class="site-footer__bottom">
+        <p>© 2027 Medicarians. All rights reserved.</p>
+        <p><a href="#insider">Terms of Service</a> · <a href="#insider">Privacy Policy</a></p>
       </div>
     </div>
+  </footer>
 
-    <div class="site-footer__bottom">
-      <p>© 2027 Medicarians. All rights reserved.</p>
-      <p><a href="#insider">Terms of Service</a> · <a href="#insider">Privacy Policy</a></p>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script src="script.js"></script>
 </body>

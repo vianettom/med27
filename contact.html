@@ -335,7 +335,10 @@
 </main>
 
 <!-- ============================ Footer ============================ -->
-<footer class="site-footer section--bloom" id="contact">
+<!-- Footer sits on the shared closing plate — .site-footer itself is
+     transparent so the home page can run it into the newsletter. -->
+<div class="closing section--bloom">
+<footer class="site-footer" id="contact">
   <div class="container">
     <div class="site-footer__cols">
       <div class="site-footer__brand">
@@ -387,6 +390,7 @@
     </div>
   </div>
 </footer>
+</div>
 
 <script src="script.js"></script>
 </body>

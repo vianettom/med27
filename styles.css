@@ -292,6 +292,14 @@ button { font: inherit; color: inherit; }
 }
 .btn--outline-light:hover { background: #fff; color: var(--navy); }
 
+.btn--white {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--navy);
+  box-shadow: var(--shadow-card);
+}
+.btn--white:hover { border-color: var(--navy); }
+
 .btn--outline-dark {
   background: transparent; /* <button> would otherwise fall back to buttonface */
   border-color: var(--line-strong);
@@ -925,8 +933,10 @@ button { font: inherit; color: inherit; }
   --bloom-c-at: 50% 50%;
   --bloom-strength: 0.15;
 }
-/* Lowest of the three — the footer is nearly all 13–14px link text. */
-.site-footer {
+/* Lowest of the three — the closing plate is nearly all 13–14px link text.
+   The plate spans the newsletter and the footer together, so the centres are
+   read against that taller box, not the footer alone. */
+.closing {
   --bloom-a-at: 84% 6%;
   --bloom-b-at: 8% 92%;
   --bloom-c-at: 45% 55%;
@@ -944,18 +954,8 @@ button { font: inherit; color: inherit; }
 .topic {
   display: flex;
   align-items: baseline;
-  gap: 22px;
   padding-block: 20px;
   border-bottom: 1px solid rgba(224, 227, 238, 0.35);
-}
-.topic__num {
-  flex: 0 0 16px;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 0.48px;
-  color: var(--pink);
 }
 .topic__title {
   font-size: 14px;
@@ -1545,6 +1545,11 @@ a.sponsor-card:focus-visible {
   line-height: 18.2px;
   color: var(--ink-faint);
 }
+.venue__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
 
 /* ===================================================== Venue page ========= */
 /* Everything below is only used by venue.html. The page reuses the home page's
@@ -2106,7 +2111,9 @@ a.sponsor-card:focus-visible {
 .quick-links a:hover { color: var(--blue); }
 
 /* ======================================================== Newsletter ====== */
-.newsletter { background: var(--cyan); }
+/* Transparent — the navy and the bloom both come from .closing, so the plate
+   runs unbroken into the footer. */
+.newsletter { background: transparent; color: #fff; }
 .newsletter__inner {
   display: flex;
   align-items: center;
@@ -2118,7 +2125,7 @@ a.sponsor-card:focus-visible {
   margin-top: 16px;
   font-size: 16px;
   line-height: 25.6px;
-  color: var(--navy);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .newsletter__form { flex: 0 1 471px; }
@@ -2140,20 +2147,37 @@ a.sponsor-card:focus-visible {
   color: var(--navy);
 }
 .newsletter__input::placeholder { color: var(--ink-faint); }
-.newsletter__input:focus-visible { outline-color: var(--blue-deep); }
+.newsletter__input:focus-visible { outline-color: var(--cyan); }
 .newsletter__row .btn { flex: 0 0 auto; height: 51px; }
 .newsletter__note {
   margin-top: 16px;
   font-size: 13px;
   line-height: 20.8px;
-  color: var(--blue-deep);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =================================================== Closing plate ======== */
+/* Holds the newsletter and the footer. Both are transparent, so the navy and
+   the single bloom layer below run the full height of the two. */
+.closing {
+  background: var(--navy);
+  color: #fff;
 }
 
 /* =========================================================== Footer ======= */
 .site-footer {
   padding-block: 96px 48px;
-  background: var(--navy);
+  background: transparent;
   color: #fff;
+}
+
+/* Home page only: the footer follows the newsletter on one unbroken plate, so
+   a hairline is the only thing marking the seam — a tenth of white, enough to
+   separate the two blocks without reading as a band edge. The top padding
+   drops to match the newsletter's 64px below, keeping the rule centred. */
+.newsletter + .site-footer {
+  padding-top: 64px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .site-footer__cols {
   display: grid;
@@ -2380,6 +2404,8 @@ a.sponsor-card:focus-visible {
   .newsletter__copy, .newsletter__form { flex: 1 1 auto; max-width: none; }
 
   .site-footer { padding-block: 72px 40px; }
+  /* Matches .section--slim above it, so the seam rule stays centred. */
+  .newsletter + .site-footer { padding-top: 56px; }
   .site-footer__cols { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
   .site-footer__brand { grid-column: 1 / -1; }
 }
