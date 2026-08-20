@@ -552,6 +552,25 @@
     </div>
   </section>
 
+  <!-- Speaker bio dialog. Empty in the markup: script.js fills it from the card
+       that was clicked, so one dialog serves every speaker. -->
+  <dialog class="speaker-modal" id="speaker-modal" aria-labelledby="speaker-modal-name">
+    <button class="speaker-modal__close" type="button" data-speaker-close aria-label="Close speaker bio">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M1 1l14 14M15 1L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="speaker-modal__inner">
+      <img class="speaker-modal__photo" data-speaker-photo src="" alt="" width="300" height="300">
+      <div class="speaker-modal__body">
+        <h2 class="speaker-modal__name" id="speaker-modal-name" data-speaker-name></h2>
+        <p class="speaker-modal__role" data-speaker-role></p>
+        <p class="speaker-modal__org" data-speaker-org></p>
+        <div class="speaker-modal__bio" data-speaker-bio></div>
+      </div>
+    </div>
+  </dialog>
+
   <!-- =========================== Sponsors =========================== -->
   <section class="section sponsors" id="sponsors">
     <div class="container">

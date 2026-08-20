@@ -406,6 +406,117 @@
 
   initSpeakerFold();
 
+  /* ----------------------------------------------------- Speaker modal -- */
+  // Each card gets a full-bleed button overlay, and clicking it copies that
+  // card's fields into the single dialog at the end of the section. With JS off
+  // the cards stay plain, which is the same contract as the fold above.
+  //
+  // Bios aren't in the markup yet. When the speakers come from the database,
+  // render each bio into a `data-bio` attribute on the <li> (paragraphs split
+  // by a blank line) and the placeholder below drops out on its own.
+  var SPEAKER_BIO_PLACEHOLDER = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod " +
+    "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " +
+    "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea " +
+    "commodo consequat.",
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+    "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non " +
+    "proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium " +
+    "doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo " +
+    "inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+  ].join("\n\n");
+
+  function initSpeakerModal() {
+    var grid = document.getElementById("speaker-grid");
+    var modal = document.getElementById("speaker-modal");
+    if (!grid || !modal) return;
+
+    // Browsers without the top-layer dialog keep the cards as static markup.
+    if (typeof modal.showModal !== "function") return;
+
+    var photo = modal.querySelector("[data-speaker-photo]");
+    var name = modal.querySelector("[data-speaker-name]");
+    var role = modal.querySelector("[data-speaker-role]");
+    var org = modal.querySelector("[data-speaker-org]");
+    var bio = modal.querySelector("[data-speaker-bio]");
+    if (!photo || !name || !role || !org || !bio) return;
+
+    var opener = null; // card trigger that opened the dialog, for focus return
+
+    function text(card, cls) {
+      var el = card.querySelector("." + cls);
+      return el ? el.textContent.trim() : "";
+    }
+
+    function open(card, trigger) {
+      var speaker = text(card, "speaker-card__name");
+      var cardPhoto = card.querySelector(".speaker-card__photo");
+
+      name.textContent = speaker;
+      role.textContent = text(card, "speaker-card__role");
+      org.textContent = text(card, "speaker-card__org");
+
+      // Cards without a headshot use the initials placeholder instead of an
+      // <img>; the modal just drops the photo in that case.
+      if (cardPhoto && cardPhoto.tagName === "IMG") {
+        photo.src = cardPhoto.currentSrc || cardPhoto.src;
+        photo.alt = speaker;
+        photo.hidden = false;
+      } else {
+        photo.removeAttribute("src");
+        photo.alt = "";
+        photo.hidden = true;
+      }
+
+      bio.innerHTML = "";
+      (card.dataset.bio || SPEAKER_BIO_PLACEHOLDER).split(/\n\s*\n/).forEach(function (para) {
+        var p = document.createElement("p");
+        p.textContent = para.trim();
+        bio.appendChild(p);
+      });
+
+      opener = trigger;
+      modal.showModal();
+      // A previous bio may have been scrolled part-way down.
+      modal.querySelector(".speaker-modal__inner").scrollTop = 0;
+    }
+
+    Array.prototype.forEach.call(grid.querySelectorAll(".speaker-card"), function (card) {
+      var trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "speaker-card__trigger";
+      trigger.setAttribute("aria-haspopup", "dialog");
+      // The card's own text is behind the overlay and would be read twice, so
+      // the button carries the label instead.
+      trigger.setAttribute("aria-label", "Read bio: " + text(card, "speaker-card__name"));
+
+      trigger.addEventListener("click", function () {
+        open(card, trigger);
+      });
+
+      card.appendChild(trigger);
+    });
+
+    modal.querySelector("[data-speaker-close]").addEventListener("click", function () {
+      modal.close();
+    });
+
+    // The dialog element itself is only the area around the panel, so a click
+    // landing on it rather than a child means outside.
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) modal.close();
+    });
+
+    // Covers the close button, the backdrop click and Esc alike.
+    modal.addEventListener("close", function () {
+      if (opener) opener.focus();
+      opener = null;
+    });
+  }
+
+  initSpeakerModal();
+
   /* ------------------------------------------------------ Sponsor fold -- */
   // Title, gold and silver stay on the page; the tiers below them fold away
   // behind the CTA. Same progressive-enhancement contract as the speakers —
