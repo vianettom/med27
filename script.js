@@ -441,4 +441,40 @@
       event.preventDefault();
     });
   }
+
+  /* -------------------------------------------------------- Contact form -- */
+  // Placeholder handler. The markup carries `novalidate` so the browser's own
+  // bubbles stay out of the way, and validity is checked here instead — which
+  // also lets the first failing field take focus. Nothing is posted anywhere:
+  // swap the body of the success branch for the real submit when this gets
+  // wired up.
+  function initContactForm() {
+    var contact = document.getElementById("contact-form-el");
+    var status = document.getElementById("form-status");
+    if (!contact || !status) return;
+
+    contact.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Red borders only appear from the first submit onwards — see the
+      // .is-validated rules in the stylesheet.
+      contact.classList.add("is-validated");
+
+      // Scoped to the controls: a <fieldset> also matches :invalid when it
+      // contains a bad field, and it comes first in document order — focusing
+      // it would silently do nothing.
+      var invalid = contact.querySelector("input:invalid, select:invalid, textarea:invalid");
+      if (invalid) {
+        status.className = "form-status form-status--error";
+        status.textContent = "Please complete the required fields above.";
+        invalid.focus();
+        return;
+      }
+
+      status.className = "form-status form-status--ok";
+      status.textContent = "Thanks — your message is ready to send. (Prototype: this form isn't connected yet.)";
+    });
+  }
+
+  initContactForm();
 })();

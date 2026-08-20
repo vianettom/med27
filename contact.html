@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us — Medicarians Vegas 2027</title>
+<meta name="description" content="Contact the Medicarians team with general inquiries, registration questions, speaking submissions or to learn more about sponsorship opportunities.">
+<link rel="icon" href="assets/img/logo-wordmark.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================ Header ============================ -->
+<header class="site-header" id="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="index.html" aria-label="Medicarians home">
+      <img src="assets/img/logo-wordmark.svg" alt="Medicarians" width="192" height="35">
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        <li><a href="index.html#who-attends">Who Attends</a></li>
+        <li><a href="index.html#speakers">Speakers</a></li>
+        <li><a href="index.html#agenda">Agenda</a></li>
+        <li><a href="index.html#schedule">Schedule</a></li>
+        <li><a href="index.html#sponsors">Sponsors</a></li>
+        <li><a href="venue.html">Venue</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+      <a class="btn btn--primary btn--sm site-nav__cta" href="index.html#register">Register</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ Hero ============================ -->
+  <section class="hero hero--page" id="top">
+    <div class="hero__media" aria-hidden="true">
+      <img src="assets/img/hero.jpg" alt="" width="2560" height="1705">
+      <span class="hero__scrim"></span>
+    </div>
+
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow eyebrow--cyan">Contact Us</p>
+        <h1 class="hero__title">We Look Forward to Hearing From You.</h1>
+        <p class="hero__lede">Thank you for your interest in Medicarians! Contact us below with general inquiries, or to learn more about Sponsorship Opportunities.</p>
+      
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ Contact ============================ -->
+  <section class="section section--tint contact" id="contact-form">
+    <div class="container contact__inner">
+
+      <!-- The heading, the form and the rail are siblings rather than the
+           heading and form sharing a wrapper: that's what lets the grid put the
+           rail on the form's row, so the two cards start level. -->
+      <div class="section-head section-head--wide contact__head">
+        <p class="eyebrow eyebrow--blue">Get in Touch</p>
+        <h2 class="h2">Tell Us How We Can Help.</h2>
+      </div>
+
+      <!-- ------------------------------ Form ------------------------------ -->
+      <!-- Placeholder submit target. script.js intercepts the submit and shows
+           a prototype confirmation; swap the action/method (or drop in the
+           HubSpot embed) when this gets wired up for real. -->
+      <form class="contact-form" id="contact-form-el" action="#" method="post" novalidate>
+
+        <fieldset class="form-block">
+          <legend class="form-block__title">About You</legend>
+
+          <div class="field-grid">
+            <p class="field">
+              <label class="field__label" for="first-name">First Name <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="first-name" name="firstname" autocomplete="given-name" required>
+            </p>
+
+            <p class="field">
+              <label class="field__label" for="last-name">Last Name <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="last-name" name="lastname" autocomplete="family-name" required>
+            </p>
+
+            <p class="field field--wide">
+              <label class="field__label" for="email">Email <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="email" id="email" name="email" autocomplete="email" required>
+            </p>
+
+            <p class="field">
+              <label class="field__label" for="job-title">Job Title <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="job-title" name="jobtitle" autocomplete="organization-title" required>
+            </p>
+
+            <p class="field">
+              <label class="field__label" for="company">Company <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="company" name="company" autocomplete="organization" required>
+            </p>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-block">
+          <legend class="form-block__title">Mailing Address</legend>
+
+          <div class="field-grid">
+            <p class="field field--wide">
+              <label class="field__label" for="address">Mailing Address <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="address" name="address" autocomplete="address-line1" required>
+            </p>
+
+            <p class="field field--wide">
+              <label class="field__label" for="address-2">Address Line 2</label>
+              <input class="field__control" type="text" id="address-2" name="address2" autocomplete="address-line2">
+            </p>
+
+            <p class="field">
+              <label class="field__label" for="city">City <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="city" name="city" autocomplete="address-level2" required>
+            </p>
+
+            <p class="field">
+              <label class="field__label" for="zip">ZIP / Postal Code <span class="field__req" aria-hidden="true">*</span></label>
+              <input class="field__control" type="text" id="zip" name="zip" autocomplete="postal-code" required>
+            </p>
+
+            <!-- Shortlist placeholder. Replace with the full ISO 3166 country
+                 list (or let the form platform inject it) when wiring up. -->
+            <p class="field">
+              <label class="field__label" for="country">Country / Region <span class="field__req" aria-hidden="true">*</span></label>
+              <span class="field__select">
+                <select class="field__control" id="country" name="country" autocomplete="country-name" required>
+                  <option value="" selected>Please Select</option>
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                  <option>United Kingdom</option>
+                  <option>Ireland</option>
+                  <option>France</option>
+                  <option>Germany</option>
+                  <option>Netherlands</option>
+                  <option>Spain</option>
+                  <option>Switzerland</option>
+                  <option>Israel</option>
+                  <option>India</option>
+                  <option>Singapore</option>
+                  <option>Japan</option>
+                  <option>Australia</option>
+                  <option>Brazil</option>
+                  <option>Other</option>
+                </select>
+              </span>
+            </p>
+
+            <!-- US states only, matching the source form. A country switch
+                 should repopulate this once the form is wired up. -->
+            <p class="field">
+              <label class="field__label" for="state">State / Region <span class="field__req" aria-hidden="true">*</span></label>
+              <span class="field__select">
+                <select class="field__control" id="state" name="state" autocomplete="address-level1" required>
+                  <option value="" selected>Please Select</option>
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>Arizona</option>
+                  <option>Arkansas</option>
+                  <option>California</option>
+                  <option>Colorado</option>
+                  <option>Connecticut</option>
+                  <option>Delaware</option>
+                  <option>District of Columbia</option>
+                  <option>Florida</option>
+                  <option>Georgia</option>
+                  <option>Hawaii</option>
+                  <option>Idaho</option>
+                  <option>Illinois</option>
+                  <option>Indiana</option>
+                  <option>Iowa</option>
+                  <option>Kansas</option>
+                  <option>Kentucky</option>
+                  <option>Louisiana</option>
+                  <option>Maine</option>
+                  <option>Maryland</option>
+                  <option>Massachusetts</option>
+                  <option>Michigan</option>
+                  <option>Minnesota</option>
+                  <option>Mississippi</option>
+                  <option>Missouri</option>
+                  <option>Montana</option>
+                  <option>Nebraska</option>
+                  <option>Nevada</option>
+                  <option>New Hampshire</option>
+                  <option>New Jersey</option>
+                  <option>New Mexico</option>
+                  <option>New York</option>
+                  <option>North Carolina</option>
+                  <option>North Dakota</option>
+                  <option>Ohio</option>
+                  <option>Oklahoma</option>
+                  <option>Oregon</option>
+                  <option>Pennsylvania</option>
+                  <option>Rhode Island</option>
+                  <option>South Carolina</option>
+                  <option>South Dakota</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Utah</option>
+                  <option>Vermont</option>
+                  <option>Virginia</option>
+                  <option>Washington</option>
+                  <option>West Virginia</option>
+                  <option>Wisconsin</option>
+                  <option>Wyoming</option>
+                  <option>Outside the United States</option>
+                </select>
+              </span>
+            </p>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-block">
+          <legend class="form-block__title">Your Inquiry</legend>
+
+          <div class="field-grid">
+            <p class="field field--wide">
+              <label class="field__label" for="describes-you">Which of the Following Best Describes You? <span class="field__req" aria-hidden="true">*</span></label>
+              <span class="field__select">
+                <select class="field__control" id="describes-you" name="segment" required>
+                  <option value="" selected>Please Select</option>
+                  <option>Health Plan</option>
+                  <option>Hospital / Hospital Network / Doctor Group / Provider Network</option>
+                  <option>IMO / FMO</option>
+                  <option>Agency / Broker</option>
+                  <option>RIA / Retirement Products</option>
+                  <option>Startup / AgeTech</option>
+                  <option>Solutions / Service Provider</option>
+                  <option>Venture Investor</option>
+                  <option>Government / Association</option>
+                  <option>Media</option>
+                  <option>Other (Please Specify)</option>
+                </select>
+              </span>
+            </p>
+
+            <p class="field field--wide">
+              <label class="field__label" for="inquiry-type">What Is Your Type of Inquiry? <span class="field__req" aria-hidden="true">*</span></label>
+              <span class="field__select">
+                <select class="field__control" id="inquiry-type" name="inquiry" required>
+                  <option value="" selected>Please Select</option>
+                  <option>Registration</option>
+                  <option>Speaking</option>
+                  <option>Venue</option>
+                  <option>Sponsorship Inquiry</option>
+                  <option>Other</option>
+                </select>
+              </span>
+            </p>
+
+            <p class="field field--wide">
+              <label class="field__label" for="comments">Comments and/or Interests</label>
+              <textarea class="field__control field__control--area" id="comments" name="comments" rows="5" placeholder="Tell us a little about what you're after."></textarea>
+            </p>
+          </div>
+        </fieldset>
+
+        <!-- Consent sits outside the fieldsets: it governs the submission as a
+             whole rather than belonging to any one group of questions. -->
+        <div class="consent">
+          <p class="consent__intro">Medicarians Events is committed to protecting and respecting your privacy. As such, we ask for your permission to contact you.</p>
+
+          <label class="consent__check" for="marketing-opt-in">
+            <input type="checkbox" id="marketing-opt-in" name="marketing-opt-in">
+            <span>Marketing offers and updates</span>
+          </label>
+
+          <p class="consent__legal">You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our <a href="index.html#insider">Privacy Policy</a> and <a href="index.html#insider">Terms of Service</a>.</p>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn--primary" type="submit">Submit</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <!-- ------------------------------ Aside ----------------------------- -->
+      <!-- The three inboxes are the fastest route for anyone who already knows
+           what they want, so they sit alongside the form rather than under it. -->
+      <aside class="contact-aside" aria-label="Other ways to reach us">
+        <!-- Outside the sticky wrapper on purpose: it's a direct child of the
+             rail so the grid can seat it in the heading row, level with the
+             section heading, leaving the cards to start at the form's top. -->
+        <h2 class="h3 contact-aside__title">Prefer Email?</h2>
+
+        <div class="contact-aside__sticky">
+          <ul class="inbox-list">
+            <li class="inbox-card">
+              <p class="inbox-card__label">General</p>
+              <a class="inbox-card__mail" href="mailto:info@medicarians.com">info@medicarians.com</a>
+              <p class="inbox-card__note">Registration, the agenda, and anything else about the show.</p>
+            </li>
+            <li class="inbox-card">
+              <p class="inbox-card__label">Sponsorship</p>
+              <a class="inbox-card__mail" href="mailto:sponsor@medicarians.com">sponsor@medicarians.com</a>
+              <p class="inbox-card__note">Packages, exhibit space, and partner activations.</p>
+            </li>
+            <li class="inbox-card">
+              <p class="inbox-card__label">Speaking</p>
+              <a class="inbox-card__mail" href="mailto:speaking@medicarians.com">speaking@medicarians.com</a>
+              <p class="inbox-card__note">Session proposals and speaker submissions.</p>
+            </li>
+          </ul>
+
+          <div class="contact-aside__links">
+            <h3 class="contact-aside__subtitle">Looking for Something Else?</h3>
+            <ul class="quick-links">
+              <li><a href="index.html#register">Register for Vegas '27</a></li>
+              <li><a href="venue.html">Venue &amp; Hotels</a></li>
+              <li><a href="index.html#speakers">Speakers</a></li>
+              <li><a href="index.html#sponsors">Sponsors</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ Footer ============================ -->
+<footer class="site-footer section--bloom" id="contact">
+  <div class="container">
+    <div class="site-footer__cols">
+      <div class="site-footer__brand">
+        <p class="site-footer__blurb">The home of senior health and wealth distribution. The entire value chain under one roof.</p>
+        <p class="site-footer__date">April 12–14, 2027 · Caesars Forum</p>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Vegas '27">
+        <h2 class="site-footer__heading">Vegas '27</h2>
+        <ul class="site-footer__list">
+          <li><a href="index.html#who-attends">Who Attends</a></li>
+          <li><a href="index.html#agenda">Agenda</a></li>
+          <li><a href="index.html#speakers">Speakers</a></li>
+          <li><a href="index.html#schedule">Schedule</a></li>
+          <li><a href="venue.html">Venue</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Attend">
+        <h2 class="site-footer__heading">Attend</h2>
+        <ul class="site-footer__list">
+          <li><a href="index.html#register">Register</a></li>
+          <li><a href="index.html#programs">Programs</a></li>
+          <li><a href="index.html#insider">Group Rates</a></li>
+          <li><a href="index.html#insider">Video Library</a></li>
+          <li><a href="index.html#insider">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Connect</h2>
+        <ul class="site-footer__list">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html#sponsors">Sponsor</a></li>
+          <li><a href="index.html#speak">Apply to Speak</a></li>
+          <li><a href="index.html#insider">LinkedIn</a></li>
+        </ul>
+        <ul class="site-footer__list site-footer__list--mail">
+          <li><a href="mailto:info@medicarians.com">info@medicarians.com</a></li>
+          <li><a href="mailto:sponsor@medicarians.com">sponsor@medicarians.com</a></li>
+          <li><a href="mailto:speaking@medicarians.com">speaking@medicarians.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© 2027 Medicarians. All rights reserved.</p>
+      <p><a href="index.html#insider">Terms of Service</a> · <a href="index.html#insider">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

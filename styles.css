@@ -1676,6 +1676,308 @@ a.sponsor-card:focus-visible {
 }
 .hotel-card__meta a:hover { text-decoration: underline; }
 
+/* =================================================== Contact page ========= */
+/* Only used by contact.html. Same deal as the venue page: the hero, section,
+   heading and button primitives are reused as-is, and everything here is the
+   form system the rest of the site has never needed — plus the inbox rail that
+   sits beside it. */
+
+/* The form is the page, so it takes the wide column; the rail is a scannable
+   sidebar, not a second reading column, hence the lopsided split.
+   Named areas rather than row numbers so the stacked layout at the breakpoint
+   is a one-line rewrite and the rail can't collide with the form.
+
+   Two rows: headings on top, cards below. The rail spans both and re-uses the
+   parent's rows via subgrid, so "Prefer Email?" lands in the heading row and
+   the first inbox card starts exactly level with the top of the form — the two
+   columns then share one 40px heading-to-card rhythm. Without subgrid support
+   the rail simply stacks from the top of its span; nothing breaks. */
+.contact__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  grid-template-areas:
+    "head rail"
+    "form rail";
+  gap: 40px 64px;
+  align-items: start;
+}
+.contact__head { grid-area: head; }
+.contact-form { grid-area: form; }
+
+.contact-aside {
+  grid-area: rail;
+  display: grid;
+  grid-template-rows: subgrid;
+  /* Stretched rather than start-aligned so the column is as tall as the form —
+     that's the runway the sticky stack below travels along. */
+  align-self: stretch;
+}
+
+/* -------------------------------------------------------- Form shell ----- */
+.contact-form {
+  padding: 40px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* <fieldset> zeroed out — the browser default border and legend indent fight
+   the card. The grouping is kept for the semantics, and the rule under each
+   legend does the visual separating instead. */
+.form-block {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.form-block + .form-block { margin-top: 36px; }
+
+.form-block__title {
+  width: 100%;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* ------------------------------------------------------------ Fields ----- */
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.field { display: block; }
+.field--wide { grid-column: 1 / -1; }
+
+.field__label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+/* Coral is the site's "pay attention" colour (see .notice) and it's the only
+   palette entry that reads at 12px against navy without becoming decoration. */
+.field__req { color: var(--coral); }
+
+.field__control {
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--navy);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field__control::placeholder { color: var(--ink-faint); }
+.field__control:hover { border-color: var(--ink-faint); }
+/* The global cyan focus ring is tuned for navy sections and washes out on a
+   white card, so form controls take blue and pair it with a filled halo. */
+.field__control:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 0;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(2, 129, 251, 0.14);
+}
+
+.field__control--area {
+  height: auto;
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Native select chrome is the one control that can't be styled consistently
+   across browsers, so it's stripped and the caret is painted back on. The
+   wrapper exists only to keep the caret out of the control's own padding. */
+.field__select { position: relative; display: block; }
+.field__select select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+  /* Long option labels ("Hospital / Hospital Network / …") would otherwise
+     stretch the grid column well past its share. */
+  text-overflow: ellipsis;
+}
+.field__select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 12px;
+  height: 8px;
+  transform: translateY(-50%);
+  background-color: var(--ink-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  pointer-events: none;
+}
+/* Until something is chosen the placeholder option should read as placeholder
+   text, not as an answer. */
+.field__select select:invalid { color: var(--ink-faint); }
+
+/* Only shown once the form has been submitted at least once, so a field the
+   visitor simply hasn't reached yet never goes red under them. */
+.contact-form.is-validated .field__control:invalid {
+  border-color: var(--coral);
+}
+
+/* ----------------------------------------------------------- Consent ----- */
+.consent {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.consent__intro {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--ink-muted);
+}
+.consent__check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--navy);
+  cursor: pointer;
+}
+.consent__check input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.consent__legal {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 20.8px;
+  color: var(--ink-faint);
+}
+.consent__legal a {
+  color: var(--blue);
+  font-weight: 700;
+}
+.consent__legal a:hover { text-decoration: underline; }
+
+/* ----------------------------------------------------------- Actions ----- */
+.form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-top: 32px;
+}
+.form-status {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+.form-status:empty { display: none; }
+.form-status--ok { color: var(--blue-deep); font-weight: 700; }
+.form-status--error { color: var(--coral); font-weight: 700; }
+
+/* ------------------------------------------------------------- Aside ----- */
+/* The rail is much shorter than the form, so it rides down with the scroll
+   rather than leaving a column of empty tint next to the address fields. */
+.contact-aside__sticky {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  /* Content height inside a full-height row, otherwise it fills the runway and
+     has nowhere to travel. */
+  align-self: start;
+}
+/* Bottom-aligned in the heading row so it sits directly above the cards rather
+   than floating up beside the eyebrow. The row gap sets the spacing. */
+.contact-aside__title { align-self: end; }
+
+.inbox-list {
+  display: grid;
+  gap: 16px;
+}
+.inbox-card {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.inbox-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(4, 60, 167, 0.14);
+}
+.inbox-card__label {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.inbox-card__mail {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+.inbox-card__mail:hover { color: var(--blue); text-decoration: underline; }
+.inbox-card__note {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-faint);
+}
+
+.contact-aside__links {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-strong);
+}
+.contact-aside__subtitle {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.quick-links { margin-top: 12px; }
+.quick-links a {
+  display: block;
+  padding-block: 8px;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--navy);
+  transition: color 0.15s ease;
+}
+.quick-links a:hover { color: var(--blue); }
+
 /* ======================================================== Newsletter ====== */
 .newsletter { background: var(--cyan); }
 .newsletter__inner {
@@ -1847,6 +2149,8 @@ a.sponsor-card:focus-visible {
 
   .day { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; }
   .day__row { grid-template-columns: 165px minmax(0, 1fr); gap: 16px; }
+
+  .contact__inner { gap: 40px; }
 }
 
 /* --- 900px: two-up everywhere, banners stack ----------------------------- */
@@ -1922,6 +2226,20 @@ a.sponsor-card:focus-visible {
     height: auto;
     aspect-ratio: 3 / 2;
   }
+
+  /* Form first once stacked — the rail is the shortcut, not the main event. */
+  .contact__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "head" "form" "rail";
+    gap: 40px;
+  }
+  /* Stacked, the rail is a plain block again — the subgrid pairing only makes
+     sense while there are two columns to line up. */
+  .contact-aside { display: block; }
+  .contact-aside__title { margin-bottom: 20px; }
+  .contact-aside__sticky { position: static; }
+  .inbox-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-form { padding: 32px; }
 
   .newsletter__inner { flex-direction: column; align-items: stretch; gap: 32px; }
   .newsletter__copy, .newsletter__form { flex: 1 1 auto; max-width: none; }
@@ -2034,6 +2352,12 @@ a.sponsor-card:focus-visible {
   .banner { padding: 32px 24px; }
 
   .venue-stats { gap: 32px; margin-block: 28px; }
+
+  .contact-form { padding: 24px; }
+  .field-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .inbox-list { grid-template-columns: minmax(0, 1fr); }
+  .form-actions .btn { width: 100%; }
+  .form-status { width: 100%; }
 
   .newsletter__row { flex-direction: column; }
   .newsletter__row .btn { width: 100%; }
